@@ -13,6 +13,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="5dp"
+
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 

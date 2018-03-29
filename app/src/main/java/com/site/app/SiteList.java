@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import android.support.v7.app.AlertDialog;
 import com.site.app.models.Site;
 
 import java.util.ArrayList;
@@ -39,6 +39,9 @@ public class SiteList extends AppCompatActivity {
         db.addData("site1");
         db.addData("site2");
         db.addData("site3");
+
+        //search button
+        Button searchbtn = (Button) findViewById(R.id.search_btn);
 
         EditText edtxt = (EditText)findViewById(R.id.search_input);
         siteList = (ListView) findViewById(R.id.listViewLayout);
@@ -64,6 +67,26 @@ public class SiteList extends AppCompatActivity {
                     }
                 }
         );
+
+        //Creat new project button
+        Button addnewbtn = (Button) findViewById(R.id.add_btn);
+
+        //showing input dialog after clicked
+        addnewbtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(SiteList.this);
+                View mView = getLayoutInflater().inflate(R.layout.project_create_dialog, null);
+                final EditText mEmail = (EditText) mView.findViewById(R.id.project_name_input);
+                final Button createprojectbtn = (Button) findViewById(R.id.create_btn);
+                final Button ccancelbtn = (Button) findViewById(R.id.cancel_btn);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+            }
+        });
     }
 
     private  void loadSiteList() {

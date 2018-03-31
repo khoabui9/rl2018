@@ -16,19 +16,31 @@
             android:id="@+id/search_input"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:padding="2dp"
-            android:textSize="20sp"
+            android:padding="5dp"
+            android:textSize="20dp"
             android:layout_alignParentLeft="true"/>
         <Button
             android:id="@+id/search_btn"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/ic_action_name" />
+            android:background="@drawable/search_btn" />
     </RelativeLayout>
     <ListView
         android:id="@+id/listViewLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/add_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
 </RelativeLayout>

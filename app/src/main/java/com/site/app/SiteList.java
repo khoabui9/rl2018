@@ -1,6 +1,7 @@
 package com.site.app;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.site.app.models.Site;
 
 import java.util.ArrayList;
@@ -78,5 +80,26 @@ public class SiteList extends AppCompatActivity {
             adapter = new SiteAdapter(this, listSite);
             siteList.setAdapter(adapter);
         }
+    }
+    
+    //Top Corner Menu:
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.mainmenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(SiteList.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

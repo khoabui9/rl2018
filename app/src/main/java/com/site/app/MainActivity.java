@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.database.sqlite.*;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = (EditText) findViewById(R.id.email_input);

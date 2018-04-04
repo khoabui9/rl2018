@@ -1,5 +1,6 @@
 package com.site.app;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;

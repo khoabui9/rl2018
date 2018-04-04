@@ -1,6 +1,7 @@
 package com.site.app;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
 import android.support.v7.app.AlertDialog;
 import com.site.app.models.Site;
 
@@ -27,6 +30,7 @@ public class SiteList extends AppCompatActivity {
     DatabaseHelper db;
     SiteAdapter adapter;
     ArrayList<Site> listSite = new ArrayList<>();
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +62,10 @@ public class SiteList extends AppCompatActivity {
                     //Toast.makeText(SiteList.this, s, Toast.LENGTH_SHORT).show();
                         if (s.toString() == null || s.toString().length() == 0 || s == "")
                             loadSiteList();
-                        else
+                        else {
+                            loadSiteList();
                             adapter.filter(s.toString());
+                        }
                     }
 
                     @Override
@@ -67,24 +73,40 @@ public class SiteList extends AppCompatActivity {
                     }
                 }
         );
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.project_create_dialog);
+
+        final Button createprojectbtn = (Button) dialog.findViewById(R.id.create_btn);
+        final Button ccancelbtn = (Button) dialog.findViewById(R.id.cancel_btn);
+        final EditText name = (EditText) dialog.findViewById(R.id.project_name_input);
 
         //Creat new project button
         Button addnewbtn = (Button) findViewById(R.id.add_btn);
 
         //showing input dialog after clicked
         addnewbtn.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view){
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(SiteList.this);
-                View mView = getLayoutInflater().inflate(R.layout.project_create_dialog, null);
-                final EditText mEmail = (EditText) mView.findViewById(R.id.project_name_input);
-                final Button createprojectbtn = (Button) findViewById(R.id.create_btn);
-                final Button ccancelbtn = (Button) findViewById(R.id.cancel_btn);
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
                 dialog.show();
 
+            }
+        });
+        createprojectbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = name.getText().toString();
+                db.addData(input);
+                loadSiteList();
+                name.setText("");
+                dialog.dismiss();
+            }
+        });
+
+        ccancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
@@ -101,5 +123,26 @@ public class SiteList extends AppCompatActivity {
             adapter = new SiteAdapter(this, listSite);
             siteList.setAdapter(adapter);
         }
+    }
+    
+    //Top Corner Menu:
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.mainmenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(SiteList.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

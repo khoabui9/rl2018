@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SiteList"></activity>
+        <activity android:name=".FormEditting"></activity>
     </application>
 
 </manifest>

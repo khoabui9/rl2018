@@ -1,82 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
         android:background="@color/lavender">
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
             android:background="@null"
             android:drawableLeft="@drawable/arrow_back"
             android:text="Back"
-            android:textSize="20dp" />
+            android:textSize="13pt"
+            android:fontFamily="@font/roboto_medium"/>
         <Button
             android:id="@+id/done_edit_btn"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:background="@null"
             android:text="Done"
-            android:textSize="20dp"
-            android:textColor="@color/red"/>
+            android:textSize="13pt"
+            android:textColor="@color/red"
+            android:fontFamily="@font/roboto_medium"/>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/pdf_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@null"
+        android:drawableLeft="@drawable/pdf_prev"
+        android:padding="8dp"
+        android:text="PDF preview"
+        android:textColor="@color/red"
+        android:fontFamily="@font/roboto_medium"
+        android:drawablePadding="8dp"
+        android:textSize="10pt"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="15px"
-        android:padding="2dp">
+        android:layout_margin="16dp">
         <TextView
             android:id="@+id/projectname_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Project's name"
             android:textSize="10pt"
-            android:textColor="@color/black">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/silver"
+            android:textColor="@color/dimgrey"
+            android:fontFamily="@font/roboto_medium">
         </TextView>
+
         <EditText
             android:id="@+id/projectname_input"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="eg.Jarvinen Oy"
             android:inputType="text"
-            android:layout_width="fill_parent">
-        </EditText>
+            android:textSize="11pt"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="4dp"/>
+
         <TextView
             android:id="@+id/worksite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Worksite/ Address"
             android:textSize="10pt"
-            android:textColor="@color/black">
-        </TextView>
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/silver"
+            android:textColor="@color/dimgrey"
+            android:fontFamily="@font/roboto_medium"/>
         <EditText
             android:id="@+id/worksite_input"
             android:layout_height="wrap_content"
             android:hint="eg.Puistokatu 7 "
             android:inputType="textPostalAddress"
-            android:layout_width="fill_parent">
+            android:layout_width="fill_parent"
+            android:textSize="11pt"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="4dp">
         </EditText>
         <TextView
             android:id="@+id/attendant"
@@ -84,14 +108,21 @@
             android:layout_height="wrap_content"
             android:text="Attendants"
             android:textSize="10pt"
-            android:textColor="@color/black">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/silver"
+            android:textColor="@color/dimgrey"
+            android:fontFamily="@font/roboto_medium">
         </TextView>
         <EditText
             android:id="@+id/attendant_input"
             android:layout_height="wrap_content"
             android:hint="Name of attendants "
             android:inputType="textPersonName"
-            android:layout_width="fill_parent">
+            android:layout_width="fill_parent"
+            android:textSize="11pt"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="4dp">
         </EditText>
         <TextView
             android:id="@+id/datetime"
@@ -99,14 +130,21 @@
             android:layout_height="wrap_content"
             android:text="Date, time"
             android:textSize="10pt"
-            android:textColor="@color/black">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/silver"
+            android:textColor="@color/dimgrey"
+            android:fontFamily="@font/roboto_medium">
         </TextView>
         <EditText
             android:id="@+id/datetime_input"
             android:layout_height="wrap_content"
             android:hint="eg 04.05.2017 13:40"
             android:inputType="datetime"
-            android:layout_width="fill_parent">
+            android:layout_width="fill_parent"
+            android:textSize="11pt"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="4dp">
         </EditText>
 
     </LinearLayout>
@@ -114,56 +152,54 @@
     <ListView
         android:id="@+id/selectedimages_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/add_img_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginHorizontal="16dp"
         android:background="@null"
-        android:padding="5dp"
+        android:padding="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/add_images"
         android:textColor="@color/red"
-        android:textSize="7pt"/>
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="10pt"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:layout_margin="16dp"
+        >
 
         <Button
             android:id="@+id/save_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="48dp"
             android:background="@color/black"
             android:drawableLeft="@drawable/save_icon"
-            android:paddingHorizontal="2dp"
+            android:padding="8dp"
             android:text="Save"
             android:textColor="@color/white"
-            android:textSize="7pt" />
+            android:fontFamily="@font/roboto_medium"
+            android:drawablePadding="8dp"
+            android:textSize="10pt"
+            android:layout_margin="4dp"/>
 
         <Button
             android:id="@+id/share_btn"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:background="@color/black"
             android:drawableLeft="@drawable/share_icon"
-            android:paddingHorizontal="2dp"
+            android:padding="8dp"
             android:text="Share"
             android:textColor="@color/white"
-            android:textSize="7pt" />
+            android:fontFamily="@font/roboto_medium"
+            android:drawablePadding="8dp"
+            android:textSize="10pt"
+            android:layout_margin="4dp"/>
     </LinearLayout>
 </LinearLayout>

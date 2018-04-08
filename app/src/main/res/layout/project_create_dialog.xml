@@ -18,10 +18,9 @@
         android:id="@+id/project_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:padding="7dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:textSize="11pt"
         android:textColor="@color/textInputColor"
         android:textColorHint="@color/textColorHint"
         android:backgroundTint="@color/textColorHint"
@@ -30,7 +29,7 @@
     <RelativeLayout
         android:layout_width="213dp"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp">
+        android:layout_margin="8dp">
 
         <Button
             android:id="@+id/create_btn"

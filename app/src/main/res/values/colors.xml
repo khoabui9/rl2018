@@ -24,4 +24,5 @@
     <color name="textColorHint">#8c8c8c</color>
     <color name="lavender">#E6E6FA</color>
     <color name="gainsboro">#DCDCDC</color>
+    <color name="dimgrey">#696969</color>
 </resources>

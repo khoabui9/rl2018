@@ -1,8 +1,17 @@
 package com.site.app;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -11,22 +20,33 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import com.google.firebase.auth.FirebaseAuth;
+import android.support.v7.app.AlertDialog;
 import com.site.app.models.Site;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SiteList extends AppCompatActivity {
+    static final int REQUEST_IMAGE_CAPTURE = 100;
+    static final int MEDIA_TYPE_IMAGE = 1;
+    private Uri fileUri;
     ListView siteList;
     DatabaseHelper db;
     SiteAdapter adapter;
     ArrayList<Site> listSite = new ArrayList<>();
+    Dialog dialog;
+    ImageView mImageView;
+    Button testbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +59,19 @@ public class SiteList extends AppCompatActivity {
         db.addData("site1");
         db.addData("site2");
         db.addData("site3");
+
+        //Test button to Form editting page
+        testbtn = (Button) findViewById(R.id.test_btn);
+        testbtn.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+        Intent myIntent = new Intent(SiteList.this, FormEditting.class);
+        SiteList.this.startActivity(myIntent);
+        }
+        });
+
+
+        // /search button
+        Button searchbtn = (Button) findViewById(R.id.search_btn);
 
         EditText edtxt = (EditText)findViewById(R.id.search_input);
         siteList = (ListView) findViewById(R.id.listViewLayout);
@@ -55,8 +88,10 @@ public class SiteList extends AppCompatActivity {
                     //Toast.makeText(SiteList.this, s, Toast.LENGTH_SHORT).show();
                         if (s.toString() == null || s.toString().length() == 0 || s == "")
                             loadSiteList();
-                        else
+                        else {
+                            loadSiteList();
                             adapter.filter(s.toString());
+                        }
                     }
 
                     @Override
@@ -64,6 +99,54 @@ public class SiteList extends AppCompatActivity {
                     }
                 }
         );
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.project_create_dialog);
+
+        final Button createprojectbtn = (Button) dialog.findViewById(R.id.create_btn);
+        final Button ccancelbtn = (Button) dialog.findViewById(R.id.cancel_btn);
+        final EditText name = (EditText) dialog.findViewById(R.id.project_name_input);
+
+        //Creat new project button
+        Button addnewbtn = (Button) findViewById(R.id.add_btn);
+
+        //showing input dialog after clicked
+        addnewbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                dialog.show();
+
+            }
+        });
+        createprojectbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = name.getText().toString();
+                db.addData(input);
+                loadSiteList();
+                name.setText("");
+                dialog.dismiss();
+            }
+        });
+
+        ccancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        siteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent takePictureIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+//
+//                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//
+//                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//                }
+            }
+        });
     }
 
     private  void loadSiteList() {
@@ -78,5 +161,26 @@ public class SiteList extends AppCompatActivity {
             adapter = new SiteAdapter(this, listSite);
             siteList.setAdapter(adapter);
         }
+    }
+    
+    //Top Corner Menu:
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.mainmenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(SiteList.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

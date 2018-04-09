@@ -54,12 +54,7 @@ public class SiteAdapter  extends  BaseAdapter {
 
         final int pos=position;
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(c,sites.get(pos).getName(),Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         return convertView;
     }

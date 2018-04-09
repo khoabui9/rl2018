@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 public class FormEditting extends AppCompatActivity {
 
-    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel;
-    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp;
+    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, fmeasureLable, tmeasureLable;
+    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
     private ListView selectedImagesList;
     @Override
@@ -22,7 +22,8 @@ public class FormEditting extends AppCompatActivity {
         backBtn = (Button) findViewById(R.id.back_btn);
 
         //Done button of Done edditing
-        doneBtn = (Button) findViewById(R.id.done_edit_btn);
+        doneBtn = (Button) findViewById(R
+                .id.done_edit_btn);
      //FORM
         //input of project name
         projectNameLabel = (TextView) findViewById(R.id.projectname_label);
@@ -42,6 +43,19 @@ public class FormEditting extends AppCompatActivity {
 
      //SHOWING LIST OF IMAGES
         selectedImagesList = (ListView) findViewById(R.id.selectedimages_list);
+
+        //Problems input
+        problemsLabel = (TextView) findViewById(R.id.problems_label);
+        problemInp = (EditText) findViewById(R.id.problems_input);
+
+        //Taken measures input
+        tmeasureLable = (TextView) findViewById(R.id.taken_measures);
+        tmeasureInp = (EditText) findViewById(R.id.takenmeasures_input);
+
+        //Further measures input
+        fmeasureLable = (TextView) findViewById(R.id.further_measures);
+        fmeasureInp = (EditText) findViewById(R.id.furthermeasure_input);
+
 
         //Add more images button
         addImageBtn = (Button) findViewById(R.id.add_img_btn);

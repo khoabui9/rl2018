@@ -28,32 +28,33 @@
             android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/background_color"
-            android:fontFamily="@string/app_name"
             android:hint="Email"
-            android:padding="2dp"
+            android:padding="8dp"
             android:textColor="@color/textInputColor"
-            android:textColorHint="@color/textColorHint"
-            android:textSize="18dp"/>
+            android:textColorHint="@color/silver"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="11pt"/>
 
         <EditText
             android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:backgroundTint="@color/background_color"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="2dp"
+            android:padding="8dp"
             android:textColor="@color/textInputColor"
-            android:textColorHint="@color/textColorHint"
-            android:textSize="18dp"/>
+            android:textColorHint="@color/silver"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="11pt"
+            />
 
         <Button
             android:id="@+id/login_btn"
@@ -63,8 +64,11 @@
             android:drawableLeft="@mipmap/ic_googleicon"
             android:text="login with google"
             android:textColor="@color/white"
-            android:paddingRight="7dp"
-            android:textSize="20dp"/>
+            android:paddingRight="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="10pt"
+            android:fontFamily="@font/roboto_medium"
+            />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -25,4 +25,5 @@
     <color name="black_overlay">#66000000</color>
     <color name="lavender">#E6E6FA</color>
     <color name="gainsboro">#DCDCDC</color>
+    <color name="dimgrey">#696969</color>
 </resources>

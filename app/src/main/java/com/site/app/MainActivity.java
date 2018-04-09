@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.database.sqlite.*;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,15 +36,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = (EditText) findViewById(R.id.email_input);
         editTextPassword = (EditText) findViewById(R.id.password_input);
         buttonLogin = (Button) findViewById(R.id.login_btn);
-        requestStorage();
         requestCam();
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                requestStorage();
                 emailString = editTextEmail.getText().toString();
                 passwordString = editTextPassword.getText().toString();
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                                         // Sign in success:
                                         Log.d("TAG", "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
+                                        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+                                        startActivity(intent);
                                     } else {
                                         // If sign in fails:
                                         Log.w("TAG", "signInWithEmail:failure", task.getException());
@@ -127,10 +130,6 @@ public class MainActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
-                    startActivity(intent);
-
                 } else {
                     Toast.makeText(MainActivity.this, "open camera failed.",
                             Toast.LENGTH_SHORT).show();
@@ -144,10 +143,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        requestStorage();
         requestCam();
         if (mAuth.getCurrentUser() != null) {
-
+            requestStorage();
             Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
             startActivity(intent);
         }

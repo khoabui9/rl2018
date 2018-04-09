@@ -41,7 +41,8 @@ public class FullscreenActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraPreview mPreview;
     private int cameraId = 0;
-    public static final int MEDIA_TYPE_IMAGE = 10;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,6 @@ public class FullscreenActivity extends AppCompatActivity {
             catch (Exception e) {
                 Toast.makeText(FullscreenActivity.this, "open camera failed." + e.toString(),
                         Toast.LENGTH_SHORT).show();
-                releaseCamera();
             }
         }
 
@@ -86,7 +86,6 @@ public class FullscreenActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // get an image from the camera
                         mCamera.takePicture(null, null, mPicture);
-                        mCamera.startPreview();
                     }
                 }
         );
@@ -105,6 +104,10 @@ public class FullscreenActivity extends AppCompatActivity {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
+                Log.v(TAG, "will now release camera");
+                mCamera.release();
+                Log.v(TAG, "will now call finish()");
+                finish();
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {

@@ -1,6 +1,7 @@
 package com.site.app;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -44,6 +45,7 @@ public class SiteList extends AppCompatActivity {
     ArrayList<Site> listSite = new ArrayList<>();
     Dialog dialog;
     ImageView mImageView;
+    Button testbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,17 @@ public class SiteList extends AppCompatActivity {
         db.addData("site2");
         db.addData("site3");
 
-        //search button
+        //Test button to Form editting page
+        testbtn = (Button) findViewById(R.id.test_btn);
+        testbtn.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+        Intent myIntent = new Intent(SiteList.this, FormEditting.class);
+        SiteList.this.startActivity(myIntent);
+        }
+        });
+
+
+        // /search button
         Button searchbtn = (Button) findViewById(R.id.search_btn);
 
         EditText edtxt = (EditText)findViewById(R.id.search_input);

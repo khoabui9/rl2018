@@ -1,7 +1,11 @@
 package com.site.app;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.database.sqlite.*;
@@ -25,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextEmail, editTextPassword;
     private Button buttonLogin;
     private String emailString, passwordString;
-
+    public static final int MY_PERMISSIONS_CAM = 0;
+    public static final int MY_PERMISSIONS_STO = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,22 +40,19 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = (EditText) findViewById(R.id.email_input);
         editTextPassword = (EditText) findViewById(R.id.password_input);
-
-
-
         buttonLogin = (Button) findViewById(R.id.login_btn);
+        requestCam();
         buttonLogin.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
-
+                requestStorage();
                 emailString = editTextEmail.getText().toString();
                 passwordString = editTextPassword.getText().toString();
 
-                if(emailString.isEmpty() || passwordString.isEmpty()) {
+                if (emailString.isEmpty() || passwordString.isEmpty()) {
                     Toast.makeText(MainActivity.this, "The username or password is empty!", Toast.LENGTH_SHORT).show();
                 }
                 //Firebase sign in with Email and Password:
-                else if(!emailString.isEmpty() && !passwordString.isEmpty()) {
+                else if (!emailString.isEmpty() && !passwordString.isEmpty()) {
                     mAuth.signInWithEmailAndPassword(emailString, passwordString)
                             .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                         // Sign in success:
                                         Log.d("TAG", "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        Intent intent = new Intent(MainActivity.this, SiteList.class);
+                                        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
                                         startActivity(intent);
                                     } else {
                                         // If sign in fails:
@@ -69,18 +71,83 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                        }
+                }
             }
         });
+    }
+
+    public  void requestCam() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                android.Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    android.Manifest.permission.CAMERA)) {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{android.Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_CAM);
+
+            } else {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_CAM);
+            }
+        } else {
+            // Permission has already been granted
+        }
+    }
+
+    public  void requestStorage() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_STO);
+
+            } else {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_STO);
+            }
+        } else {
+            // Permission has already been granted
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_CAM: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    Toast.makeText(MainActivity.this, "open camera failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
     }
 
     //Firebase Autologin:
     @Override
     public void onStart() {
         super.onStart();
+        requestCam();
         if (mAuth.getCurrentUser() != null) {
-            Intent i = new Intent(MainActivity.this, SiteList.class);
-            startActivity(i);
+            requestStorage();
+            Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+            startActivity(intent);
         }
     }
 

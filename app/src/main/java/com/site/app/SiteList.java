@@ -45,7 +45,6 @@ public class SiteList extends AppCompatActivity {
     ArrayList<Site> listSite = new ArrayList<>();
     Dialog dialog;
     ImageView mImageView;
-    Button testbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +59,7 @@ public class SiteList extends AppCompatActivity {
         db.addData("site2");
         db.addData("site3");
 
-        //Test button to Form editting page
-        testbtn = (Button) findViewById(R.id.test_btn);
-        testbtn.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-        Intent myIntent = new Intent(SiteList.this, FormEditting.class);
-        SiteList.this.startActivity(myIntent);
-        }
-        });
+
 
 
         // /search button
@@ -145,6 +137,8 @@ public class SiteList extends AppCompatActivity {
 //
 //                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 //                }
+                Intent i = new Intent(SiteList.this, FormEditting.class);
+                startActivity(i);
             }
         });
     }

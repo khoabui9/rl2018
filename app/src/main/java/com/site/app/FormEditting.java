@@ -1,9 +1,13 @@
 package com.site.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -11,8 +15,8 @@ public class FormEditting extends AppCompatActivity {
 
     private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, fmeasureLable, tmeasureLable;
     private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
-    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
-    private ListView selectedImagesList;
+    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
+    private GridView selectedImagesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +24,25 @@ public class FormEditting extends AppCompatActivity {
 
         //Back button to previous page
         backBtn = (Button) findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FormEditting.this, SiteList.class);
+                startActivity(i);
+            }
+        });
 
         //Done button of Done edditing
         doneBtn = (Button) findViewById(R
                 .id.done_edit_btn);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FormEditting.this, SiteList.class);
+                startActivity(i);
+            }
+        });
+
      //FORM
         //input of project name
         projectNameLabel = (TextView) findViewById(R.id.projectname_label);
@@ -42,19 +61,19 @@ public class FormEditting extends AppCompatActivity {
         dateTimeInp = (EditText) findViewById(R.id.datetime_input);
 
      //SHOWING LIST OF IMAGES
-        selectedImagesList = (ListView) findViewById(R.id.selectedimages_list);
+        selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
-        //Problems input
-        problemsLabel = (TextView) findViewById(R.id.problems_label);
-        problemInp = (EditText) findViewById(R.id.problems_input);
+        //This is just for testing UI
+        goToEditImage = (Button) findViewById(R.id.testbtn);
+        goToEditImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FormEditting.this, ImageEditingForm.class);
+                startActivity(i);
+            }
+        });
 
-        //Taken measures input
-        tmeasureLable = (TextView) findViewById(R.id.taken_measures);
-        tmeasureInp = (EditText) findViewById(R.id.takenmeasures_input);
 
-        //Further measures input
-        fmeasureLable = (TextView) findViewById(R.id.further_measures);
-        fmeasureInp = (EditText) findViewById(R.id.furthermeasure_input);
 
 
         //Add more images button

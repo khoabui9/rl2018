@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import android.support.v7.app.AlertDialog;
 import com.site.app.models.Site;
+import static java.lang.Math.toIntExact;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +140,11 @@ public class SiteList extends AppCompatActivity {
 //                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 //                }
                 Intent i = new Intent(SiteList.this, FormEditting.class);
+                int a = (int) id;
+                Site site = listSite.get(a);
+                i.putExtra("id", site.getId());
+                String aa = site.getName() + site.getId();
+                Toast.makeText(SiteList.this, aa, Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
         });

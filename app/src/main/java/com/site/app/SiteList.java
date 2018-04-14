@@ -143,8 +143,8 @@ public class SiteList extends AppCompatActivity {
                 int a = (int) id;
                 Site site = listSite.get(a);
                 i.putExtra("id", site.getId());
-                String aa = site.getName() + site.getId();
-                Toast.makeText(SiteList.this, aa, Toast.LENGTH_SHORT).show();
+                //String aa = site.getName() + site.getId();
+                //Toast.makeText(SiteList.this, aa, Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
         });

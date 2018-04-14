@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FormEditting extends AppCompatActivity {
 
@@ -17,10 +18,13 @@ public class FormEditting extends AppCompatActivity {
     private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
     private GridView selectedImagesList;
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_editting);
+        Intent i = getIntent();
+        id = i.getIntExtra("id", 0);
 
         //Back button to previous page
         backBtn = (Button) findViewById(R.id.back_btn);
@@ -87,4 +91,10 @@ public class FormEditting extends AppCompatActivity {
 
 
     };
+
+    @Override
+    public void onBackPressed() {
+        FormEditting.this.finish();
+    }
 }
+

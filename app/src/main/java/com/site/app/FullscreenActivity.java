@@ -55,6 +55,15 @@ public class FullscreenActivity extends AppCompatActivity {
                 } else {
                     mCamera = Camera.open(cameraId);
                 }
+                try {
+                    Camera.Parameters params = mCamera.getParameters();
+                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                    mCamera.setParameters(params);
+                }
+                catch (Exception e) {
+
+                }
                 // Create our Preview view and set it as the content of our activity.
                 mPreview = new CameraPreview(FullscreenActivity.this, mCamera);
                 FrameLayout preview = (FrameLayout) findViewById(R.id.cam);

@@ -22,7 +22,7 @@
             android:background="@null"
             android:drawableLeft="@drawable/arrow_back"
             android:text="Back"
-            android:textSize="13pt"
+            android:textSize="10pt"
             android:fontFamily="@font/roboto_medium"/>
         <Button
             android:id="@+id/done_edit_btn"
@@ -31,11 +31,17 @@
             android:layout_alignParentRight="true"
             android:background="@null"
             android:text="Done"
-            android:textSize="13pt"
+            android:textSize="10pt"
             android:textColor="@color/red"
             android:fontFamily="@font/roboto_medium"/>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/testbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is just for testing UI" />
 
     <Button
         android:id="@+id/pdf_preview"
@@ -159,10 +165,19 @@
 
     </LinearLayout>
 
-    <ListView
+
+    <GridView
         android:id="@+id/selectedimages_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:columnWidth="80dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:layout_marginHorizontal="16dp"
+        />
 
     <Button
         android:id="@+id/add_img_btn"

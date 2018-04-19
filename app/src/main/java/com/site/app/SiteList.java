@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import android.support.v7.app.AlertDialog;
 import com.site.app.models.Site;
+import static java.lang.Math.toIntExact;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,6 @@ public class SiteList extends AppCompatActivity {
     ArrayList<Site> listSite = new ArrayList<>();
     Dialog dialog;
     ImageView mImageView;
-    Button testbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +61,7 @@ public class SiteList extends AppCompatActivity {
         db.addData("site2");
         db.addData("site3");
 
-        //Test button to Form editting page
-        testbtn = (Button) findViewById(R.id.test_btn);
-        testbtn.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-        Intent myIntent = new Intent(SiteList.this, FormEditting.class);
-        SiteList.this.startActivity(myIntent);
-        }
-        });
+
 
 
         // /search button
@@ -145,6 +139,13 @@ public class SiteList extends AppCompatActivity {
 //
 //                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 //                }
+                Intent i = new Intent(SiteList.this, FormEditting.class);
+                int a = (int) id;
+                Site site = listSite.get(a);
+                i.putExtra("id", site.getId());
+                //String aa = site.getName() + site.getId();
+                //Toast.makeText(SiteList.this, aa, Toast.LENGTH_SHORT).show();
+                startActivity(i);
             }
         });
     }

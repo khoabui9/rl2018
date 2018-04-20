@@ -76,8 +76,8 @@ import android.widget.Toast;
 
 public class FormEditting extends AppCompatActivity {
 
-    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, fmeasureLable, tmeasureLable;
-    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
+    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, measuresLabel;
+    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, measureInp;
 
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
     private GridView selectedImagesList;
@@ -150,6 +150,9 @@ public class FormEditting extends AppCompatActivity {
         //input of Date and Time
         dateTimeLabel = (TextView) findViewById(R.id.datetime);
         dateTimeInp = (EditText) findViewById(R.id.datetime_input);
+        //input of measures
+        projectNameLabel = (TextView) findViewById(R.id.measures);
+        projectNameInp = (EditText) findViewById(R.id.measures_input);
 
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);

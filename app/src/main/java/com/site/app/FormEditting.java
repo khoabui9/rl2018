@@ -76,11 +76,11 @@ import android.widget.Toast;
 
 public class FormEditting extends AppCompatActivity {
 
-    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, fmeasureLable, tmeasureLable;
-    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
+    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, measuresLabel;
+    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, measureInp;
 
-    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
-    private ListView selectedImagesList;
+    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
+    private GridView selectedImagesList;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
 
     private FirebaseAuth mAuth;
@@ -91,11 +91,8 @@ public class FormEditting extends AppCompatActivity {
 
     private  ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
 
-
-    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
-    private GridView selectedImagesList;
     private int id;
- 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,20 +150,12 @@ public class FormEditting extends AppCompatActivity {
         //input of Date and Time
         dateTimeLabel = (TextView) findViewById(R.id.datetime);
         dateTimeInp = (EditText) findViewById(R.id.datetime_input);
+        //input of measures
+        projectNameLabel = (TextView) findViewById(R.id.measures);
+        projectNameInp = (EditText) findViewById(R.id.measures_input);
 
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
-
-        //This is just for testing UI
-        goToEditImage = (Button) findViewById(R.id.testbtn);
-        goToEditImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(FormEditting.this, ImageEditingForm.class);
-                startActivity(i);
-            }
-        });
-
 
 
 
@@ -494,10 +483,10 @@ public class FormEditting extends AppCompatActivity {
 
     };
 
-    @Override
-    public void onBackPressed() {
-        FormEditting.this.finish();
-    }
+   // @Override
+    //public void onBackPressed() {
+   //     FormEditting.this.finish();
+   // }
 
-}
+//}
 

@@ -38,12 +38,6 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/testbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is just for testing UI" />
-
-    <Button
         android:id="@+id/pdf_preview"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -162,6 +156,28 @@
             android:fontFamily="@font/roboto_medium"
             android:layout_marginBottom="4dp">
         </EditText>
+        <TextView
+            android:id="@+id/measures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Measures"
+            android:textSize="8pt"
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/silver"
+            android:textColor="@color/dimgrey"
+            android:fontFamily="@font/roboto_medium"/>
+        <EditText
+            android:id="@+id/measures_input"
+            android:layout_height="wrap_content"
+            android:hint="Measures that have been taken... "
+            android:layout_width="fill_parent"
+            android:textSize="10pt"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="4dp"
+            android:minLines="3"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"/>
 
     </LinearLayout>
 
@@ -193,112 +209,102 @@
         android:textSize="10pt"/>
 
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:layout_margin="16dp">
-
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:background="@color/black"
-            android:drawableLeft="@drawable/save_icon"
-            android:padding="8dp"
-            android:text="Save"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:drawablePadding="8dp"
-            android:textSize="10pt"
-            android:layout_margin="4dp"/>
-
-        <Button
-            android:id="@+id/share_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:background="@color/black"
-            android:drawableLeft="@drawable/share_icon"
-            android:padding="8dp"
-            android:text="Share"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_medium"
-            android:drawablePadding="8dp"
-            android:textSize="10pt"
-            android:layout_margin="4dp"/>
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3"
-        android:layout_marginBottom="10dp">
+        android:weightSum="2"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="16dp">
 
         <LinearLayout
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="2"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="3dp">
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="466px"
+                android:layout_marginTop="8dp" />
 
         <EditText
             android:id="@+id/editText1"
-            android:hint="Description1"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:hint="Problems..."
+            android:textSize="10pt"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:layout_marginBottom="4dp"
+            android:minLines="2"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
             android:layout_weight="1"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="2"
-            android:layout_weight="1">
+            android:weightSum="2">
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_width="match_parent"
+                android:layout_height="466px"
+                android:layout_marginTop="8dp" />
 
             <EditText
                 android:id="@+id/editText2"
-                android:hint="Description2"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:hint="Problems..."
+                android:textSize="10pt"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginBottom="4dp"
+                android:minLines="2"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="1dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:weightSum="2"
-            android:layout_weight="1">
+            android:weightSum="2">
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_width="match_parent"
+                android:layout_height="466px"
+                android:layout_marginTop="8dp" />
 
             <EditText
                 android:id="@+id/editText3"
-                android:hint="Description3"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:hint="Problems..."
+                android:textSize="10pt"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginBottom="4dp"
+                android:minLines="2"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -308,7 +314,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="3"
+                android:weightSum="2"
                 android:layout_marginBottom="10dp">
 
                 <LinearLayout
@@ -371,6 +377,40 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="@color/black"
+                    android:drawableLeft="@drawable/save_icon"
+                    android:padding="8dp"
+                    android:text="Save"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/roboto_medium"
+                    android:drawablePadding="8dp"
+                    android:textSize="10pt"
+                    android:layout_margin="4dp"/>
+
+                <Button
+                    android:id="@+id/share_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="@color/black"
+                    android:drawableLeft="@drawable/share_icon"
+                    android:padding="8dp"
+                    android:text="Share"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/roboto_medium"
+                    android:drawablePadding="8dp"
+                    android:textSize="10pt"
+                    android:layout_margin="4dp"/>
             </LinearLayout>
 
 

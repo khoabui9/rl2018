@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.Manifest;
 import android.provider.MediaStore.Files.FileColumns;
@@ -76,8 +77,8 @@ public class FullscreenActivity extends AppCompatActivity {
         }
 
 
-        Button next = (Button) findViewById(R.id.btn_next);
-        Button capture = (Button) findViewById(R.id.btn_capture);
+        ImageButton next = (ImageButton) findViewById(R.id.btn_next);
+        ImageButton capture = (ImageButton) findViewById(R.id.btn_capture);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

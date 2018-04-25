@@ -62,355 +62,356 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="16dp">
-
-        <TextView
-            android:id="@+id/projectname_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Project's name"
-            android:textSize="10pt"
-            android:layout_marginBottom="8dp"
-            android:textColorHint="@color/silver"
-            android:textColor="@color/dimgrey"
-            android:fontFamily="@font/roboto_medium">
-        </TextView>
-
-        <EditText
-            android:id="@+id/projectname_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="eg.Jarvinen Oy"
-            android:inputType="text"
-            android:textSize="11pt"
-            android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="4dp"/>
-
-        <TextView
-            android:id="@+id/worksite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Worksite/ Address"
-            android:textSize="10pt"
-            android:layout_marginBottom="8dp"
-            android:textColorHint="@color/silver"
-            android:textColor="@color/dimgrey"
-            android:fontFamily="@font/roboto_medium"/>
-        <EditText
-            android:id="@+id/worksite_input"
-            android:layout_height="wrap_content"
-            android:hint="eg.Puistokatu 7 "
-            android:inputType="textPostalAddress"
-            android:layout_width="match_parent"
-            android:textSize="11pt"
-            android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="4dp">
-        </EditText>
-        <TextView
-            android:id="@+id/attendant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Attendants"
-            android:textSize="10pt"
-            android:layout_marginBottom="8dp"
-            android:textColorHint="@color/silver"
-            android:textColor="@color/dimgrey"
-            android:fontFamily="@font/roboto_medium">
-        </TextView>
-        <EditText
-            android:id="@+id/attendant_input"
-            android:layout_height="wrap_content"
-            android:hint="Name of attendants "
-            android:inputType="textPersonName"
-            android:layout_width="match_parent"
-            android:textSize="11pt"
-            android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="4dp">
-        </EditText>
-        <TextView
-            android:id="@+id/datetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date, time"
-            android:textSize="10pt"
-            android:layout_marginBottom="8dp"
-            android:textColorHint="@color/silver"
-            android:textColor="@color/dimgrey"
-            android:fontFamily="@font/roboto_medium">
-        </TextView>
-        <EditText
-            android:id="@+id/datetime_input"
-            android:layout_height="wrap_content"
-            android:hint="eg 04.05.2017 13:40"
-            android:inputType="datetime"
-            android:layout_width="match_parent"
-            android:textSize="11pt"
-            android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="4dp">
-        </EditText>
-        <TextView
-            android:id="@+id/measures"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Measures"
-            android:textSize="8pt"
-            android:layout_marginBottom="8dp"
-            android:textColorHint="@color/silver"
-            android:textColor="@color/dimgrey"
-            android:fontFamily="@font/roboto_medium"/>
-        <EditText
-            android:id="@+id/measures_input"
-            android:layout_height="wrap_content"
-            android:hint="Measures that have been taken... "
-            android:layout_width="fill_parent"
-            android:textSize="10pt"
-            android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="4dp"
-            android:minLines="3"
-            android:gravity="top|left"
-            android:inputType="textMultiLine"/>
-
-    </LinearLayout>
-
-
-    <GridView
-        android:id="@+id/selectedimages_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnWidth="80dp"
-        android:numColumns="2"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:layout_marginHorizontal="16dp"
-        />
-
-    <Button
-        android:id="@+id/add_img_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:background="@null"
-        android:padding="8dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/add_images"
-        android:textColor="@color/red"
-        android:fontFamily="@font/roboto_medium"
-        android:textSize="10pt"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:layout_marginHorizontal="16dp">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="2"
-            android:layout_weight="1"
-            android:layout_margin="3dp">
-
-            <ImageView
-                android:id="@+id/imageView1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="466px"
-                android:layout_marginTop="8dp" />
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Problems..."
-            android:textSize="10pt"
-            android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginBottom="4dp"
-            android:minLines="2"
-            android:gravity="top|left"
-            android:inputType="textMultiLine"
-            android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="2">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="466px"
-                android:layout_marginTop="8dp" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="Problems..."
-                android:textSize="10pt"
-                android:textColor="@color/black"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginBottom="4dp"
-                android:minLines="2"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:layout_weight="1" />
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/projectname_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Project's name"
+                    android:textColor="@color/dimgrey"
+                    android:textColorHint="@color/silver"
+                    android:textSize="10pt"></TextView>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="2">
+                <EditText
+                    android:id="@+id/projectname_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="eg.Jarvinen Oy"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textSize="11pt" />
 
-            <ImageView
-                android:id="@+id/imageView3"
+                <TextView
+                    android:id="@+id/worksite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Worksite/ Address"
+                    android:textColor="@color/dimgrey"
+                    android:textColorHint="@color/silver"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/worksite_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="eg.Puistokatu 7 "
+                    android:inputType="textPostalAddress"
+                    android:textColor="@color/black"
+                    android:textSize="11pt"></EditText>
+
+                <TextView
+                    android:id="@+id/attendant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Attendants"
+                    android:textColor="@color/dimgrey"
+                    android:textColorHint="@color/silver"
+                    android:textSize="10pt"></TextView>
+
+                <EditText
+                    android:id="@+id/attendant_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="Name of attendants "
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textSize="11pt"></EditText>
+
+                <TextView
+                    android:id="@+id/datetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Date, time"
+                    android:textColor="@color/dimgrey"
+                    android:textColorHint="@color/silver"
+                    android:textSize="10pt"></TextView>
+
+                <EditText
+                    android:id="@+id/datetime_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="eg 04.05.2017 13:40"
+                    android:inputType="datetime"
+                    android:textColor="@color/black"
+                    android:textSize="11pt"></EditText>
+
+                <TextView
+                    android:id="@+id/measures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Measures"
+                    android:textColor="@color/dimgrey"
+                    android:textColorHint="@color/silver"
+                    android:textSize="8pt" />
+
+                <EditText
+                    android:id="@+id/measures_input"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="top|left"
+                    android:hint="Measures that have been taken... "
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:textColor="@color/black"
+                    android:textSize="10pt" />
+
+            </LinearLayout>
+
+
+            <GridView
+                android:id="@+id/selectedimages_list"
                 android:layout_width="match_parent"
-                android:layout_height="466px"
-                android:layout_marginTop="8dp" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="Problems..."
-                android:textSize="10pt"
-                android:textColor="@color/black"
+                android:layout_marginHorizontal="16dp"
+                android:columnWidth="80dp"
+                android:gravity="center"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="10dp" />
+
+            <Button
+                android:id="@+id/add_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@null"
                 android:fontFamily="@font/roboto_medium"
-                android:layout_marginBottom="4dp"
-                android:minLines="2"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:layout_weight="1" />
+                android:padding="8dp"
+                android:text="@string/add_images"
+                android:textColor="@color/red"
+                android:textSize="10pt" />
 
-        </LinearLayout>
-
-    </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="16dp"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginBottom="10dp">
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="466px"
+                        android:layout_marginTop="8dp" />
+
+                    <EditText
+                        android:id="@+id/editText1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="top|left"
+                        android:hint="Problems..."
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:textColor="@color/black"
+                        android:textSize="10pt" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="466px"
+                        android:layout_marginTop="8dp" />
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="top|left"
+                        android:hint="Problems..."
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:textColor="@color/black"
+                        android:textSize="10pt" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="466px"
+                        android:layout_marginTop="8dp" />
+
+                    <EditText
+                        android:id="@+id/editText3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="top|left"
+                        android:hint="Problems..."
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:textColor="@color/black"
+                        android:textSize="10pt" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <LinearLayout
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
+                    android:orientation="vertical"
                     android:weightSum="2">
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
-                 <EditText
-                     android:id="@+id/editText4"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"/>
+                    <EditText
+                        android:id="@+id/editText4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
-            </LinearLayout>
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="10dp">
+                android:weightSum="3">
 
                 <ImageView
                     android:id="@+id/imageView7"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/imageView8"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/imageView9"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
-                android:layout_margin="16dp">
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/save_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_margin="4dp"
                     android:background="@color/black"
                     android:drawableLeft="@drawable/save_icon"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:padding="8dp"
                     android:text="Save"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/roboto_medium"
-                    android:drawablePadding="8dp"
-                    android:textSize="10pt"
-                    android:layout_margin="4dp"/>
+                    android:textSize="10pt" />
 
                 <Button
                     android:id="@+id/share_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_margin="4dp"
                     android:background="@color/black"
                     android:drawableLeft="@drawable/share_icon"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:padding="8dp"
                     android:text="Share"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/roboto_medium"
-                    android:drawablePadding="8dp"
-                    android:textSize="10pt"
-                    android:layout_margin="4dp"/>
+                    android:textSize="10pt" />
             </LinearLayout>
 
 

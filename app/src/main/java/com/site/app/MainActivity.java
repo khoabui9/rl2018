@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                                         // Sign in success:
                                         Log.d("TAG", "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+                                        Intent intent = new Intent(MainActivity.this, FormEditting.class);
                                         startActivity(intent);
                                     } else {
                                         // If sign in fails:
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         requestCam();
         if (mAuth.getCurrentUser() != null) {
             requestStorage();
-            Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+            Intent intent = new Intent(MainActivity.this, FormEditting.class);
             startActivity(intent);
         }
     }

@@ -67,6 +67,9 @@ public class FormEditting extends AppCompatActivity {
     private ListView selectedImagesList;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
 
+    private String stringProb1, stringProb2, stringProb3 = "";
+    private String stringWorkSite, stringProjectName = "";
+
     private FirebaseAuth mAuth;
 
     int PICK_IMAGE_MULTIPLE = 1;
@@ -74,6 +77,8 @@ public class FormEditting extends AppCompatActivity {
     java.util.List<String> imagesEncodedList;
 
     private  ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+    private  ArrayList<String> mArrayFilePath = new ArrayList<String>();
+    private  ArrayList<String> mArrayProblems = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,9 +151,10 @@ public class FormEditting extends AppCompatActivity {
 
         //Problems editText:
         final EditText editText1 = (EditText) findViewById(R.id.editText1);
+
         final EditText editText2 = (EditText) findViewById(R.id.editText2);
         final EditText editText3 = (EditText) findViewById(R.id.editText3);
-        EditText editText4 = (EditText) findViewById(R.id.editText4);
+        final EditText editText4 = (EditText) findViewById(R.id.editText4);
 
         String userEmailString = "unknown";
 
@@ -173,9 +179,6 @@ public class FormEditting extends AppCompatActivity {
         addImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-//                photoPickerIntent.setType("image/*");
-//                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
 
                 Intent intent = new Intent();
                 intent.setType("image/*");
@@ -192,6 +195,17 @@ public class FormEditting extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
+                stringProb1 = editText1.getText().toString();
+                stringProb2 = editText2.getText().toString();
+                stringProb3 = editText3.getText().toString();
+
+                stringProjectName = projectNameInp.getText().toString();
+                stringWorkSite = workSiteInp.getText().toString();
+
+                mArrayProblems.add(stringProb1);
+                mArrayProblems.add(stringProb2);
+                mArrayProblems.add(stringProb3);
 
                 Document document = new Document();
                 try {
@@ -214,44 +228,22 @@ public class FormEditting extends AppCompatActivity {
                     document.add(new Paragraph("Inspection PDF:"));
                     document.add(new Paragraph("Inspector:" + attendantInp.getText().toString()));
                     document.add(new Paragraph("Data and time: " + dateTimeInp.getText().toString()));
+                    document.add(new Paragraph("Project name: " + stringProjectName));
+                    document.add(new Paragraph("Worksite/Address: " + stringWorkSite));
 
                     PdfPTable table = new PdfPTable(3);
                     table.setWidthPercentage(105);
                     table.setSpacingBefore(11f);
                     table.setSpacingAfter(11f);
 
-//                    mArrayUri = new ArrayList<Uri>();
-
-                    Log.v("LOG_TAG", "Selected Images First Path: " + mArrayUri.get(1).getPath());
-
                     try {
-                        //final InputStream imageStream = getContentResolver().openInputStream(Uri.parse(mArrayUri.get(1).getPath()));
-//                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+//                        Bitmap bmp = BitmapFactory.decodeFile("/storage/emulated/0/DCIM/Camera/IMG_20180411_094332.jpg");
 //                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                        selectedImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
 //                        Image image = Image.getInstance(stream.toByteArray());
 //                        document.add(image);
 
-                        File file = new File(mArrayUri.get(1).getPath());
-
-                        String path = (mArrayUri.get(1)).getEncodedPath();
-
-
-
-                        Image img = Image.getInstance(file.getAbsolutePath());
-                        document.setPageSize(img);
-                        document.newPage();
-                        img.setAbsolutePosition(0, 0);
-                        document.add(img);
-
-
-                        Log.v("LOG_TAG", "Image added finally");
-
-//                    Image img = Image.getInstance(String.valueOf(mArrayUri.get(0)));
-//                    document.setPageSize(img);
-//                    document.newPage();
-//                    img.setAbsolutePosition(0, 0);
-//                    document.add(img);
 
                     } catch(Exception e) {
                         Log.v("LOG_TAG", "Image CAN NOT ADDED" + e);
@@ -266,43 +258,63 @@ public class FormEditting extends AppCompatActivity {
                         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                         Image image = Image.getInstance(stream.toByteArray());
                         document.add(image);
-                        Log.v("LOG_TAG", "Image addeddddddddddddddddddddd");
+                        //Log.v("LOG_TAG", "Image addeddddddddddddddddddddd");
                     }
                     catch(IOException ex)
                     {
                         return;
                     }
 
-//                    Image img = Image.getInstance(String.valueOf(mArrayUri.get(1)));
-//                    img.scaleAbsolute(400, 300);
-//                    img.setAbsolutePosition(0, 0);
-//                    PdfImage stream = new PdfImage(img, "", null);
-//                    stream.put(new PdfName("ITXT_SpecialId"), new PdfName("123456789"));
-//                    PdfIndirectObject ref = writer.addToBody(stream);
-//                    img.setDirectReference(ref.getIndirectReference());
-//                    document.add(img);
+//                    float[] colWidth = {2f, 2f, 2f};
+//                    table.setWidths(colWidth);
+//                    PdfPCell c1 = new PdfPCell(new Paragraph("Problem1"));
+//                    PdfPCell c2 = new PdfPCell(new Paragraph("Probelm2"));
+//                    PdfPCell c3 = new PdfPCell(new Paragraph("Problem3"));
+//                    table.addCell(c1);
+//                    table.addCell(c2);
+//                    table.addCell(c3);
+//                    document.add(table);
+//
+//                    List orderList = new List(List.ORDERED);
+//                    orderList.add(new ListItem("Problem1: " + editText1.getText().toString()));
+//                    orderList.add(new ListItem("Problem2" + editText2.getText().toString()));
+//                    orderList.add(new ListItem("Problem3" + editText3.getText().toString()));
+//                    document.add(orderList);
+//
+//                    List unOrderList = new List(List.UNORDERED);
+//                    unOrderList.add(new ListItem("Problem4"));
+//                    unOrderList.add(new ListItem("Problem5"));
+//                    unOrderList.add(new ListItem("Problem6"));
+//                    document.add(unOrderList);
 
-                    float[] colWidth = {2f, 2f, 2f};
-                    table.setWidths(colWidth);
-                    PdfPCell c1 = new PdfPCell(new Paragraph("Problem1"));
-                    PdfPCell c2 = new PdfPCell(new Paragraph("Probelm2"));
-                    PdfPCell c3 = new PdfPCell(new Paragraph("Problem3"));
-                    table.addCell(c1);
-                    table.addCell(c2);
-                    table.addCell(c3);
-                    document.add(table);
+//                    for(int i = 0; i < mArrayProblems.size(); i++) {
+//
+//                        document.add(new Paragraph("Problem " + i + " description : " + mArrayProblems.get(i)));
+//
+//                    }
 
-                    List orderList = new List(List.ORDERED);
-                    orderList.add(new ListItem("Problem1: " + editText1.getText().toString()));
-                    orderList.add(new ListItem("Problem2" + editText2.getText().toString()));
-                    orderList.add(new ListItem("Problem3" + editText3.getText().toString()));
-                    document.add(orderList);
+                    for(int i = 0; i < mArrayFilePath.size(); i++) {
 
-                    List unOrderList = new List(List.UNORDERED);
-                    unOrderList.add(new ListItem("Problem4"));
-                    unOrderList.add(new ListItem("Problem5"));
-                    unOrderList.add(new ListItem("Problem6"));
-                    document.add(unOrderList);
+                        try {
+                            Bitmap bmp = BitmapFactory.decodeFile(mArrayFilePath.get(i));
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            Image image = Image.getInstance(stream.toByteArray());
+                            image.scaleAbsolute(400, 300);
+                            document.add(image);
+
+                            if(mArrayProblems.get(i) != "") {
+                                document.add(new Paragraph("Problem " + (i + 1) + " description : " + mArrayProblems.get(i)));
+                            }
+
+                        } catch (IOException e) {
+
+                        }
+
+//                        document.add(new Paragraph("Problem " + (i+1) + " description : " + mArrayProblems.get(i)));
+
+
+                    }
 
                     document.close();
                     writer.close();
@@ -397,25 +409,19 @@ public class FormEditting extends AppCompatActivity {
                             Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
 
                             File myFile = new File(mArrayUri.get(i).toString());
-//                            myFile.getAbsolutePath();
 
-//                            String path = mArrayUri.get(i).getPath();
-//                            Log.v("LOG_TAG", "Selected Images Path: " + path);
+                            String realPath;
 
-//                                String something3 = mArrayString.replace("content:", "");
+                            realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
+
+                            mArrayFilePath.add(realPath);
+
+                            Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
+
+//                            Bitmap myBitmap = BitmapFactory.decodeFile(realPath);
 //
-//                                Uri someThing4 = Uri.parse(something3);
-//
+//                            imageView4.setImageBitmap(myBitmap);
 
-
-
-
-
-//
-//                            String someThing = getRealPathFromURI(someThing4);
-////
-////                            String someThing = someThing1.replace("content:", "");
-////
                             Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
 
 
@@ -443,6 +449,8 @@ public class FormEditting extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 
     public String getRealPathFromURI(Uri contentUri)
     {

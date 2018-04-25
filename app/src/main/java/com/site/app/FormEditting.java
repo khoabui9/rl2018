@@ -167,11 +167,6 @@ public class FormEditting extends AppCompatActivity {
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master-beta
 
 
         //Add more images button
@@ -501,7 +496,7 @@ public class FormEditting extends AppCompatActivity {
 
 
     };
-<<<<<<< HEAD
+
 
    // @Override
     //public void onBackPressed() {
@@ -511,12 +506,12 @@ public class FormEditting extends AppCompatActivity {
 //}
 
 
-=======
+
 /*
     @Override
     public void onBackPressed() {
         FormEditting.this.finish();
     }
 }*/
->>>>>>> master-beta
+
 

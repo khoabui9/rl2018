@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/cam"
         android:layout_width="match_parent"
-        android:layout_height="524dp"
+        android:layout_height="519dp"
         android:background="@color/black"
         android:fitsSystemWindows="true" />
 
@@ -21,34 +21,34 @@
         android:paddingBottom="8dp"
         android:paddingHorizontal="40dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_cancel"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/x_btn"
+            android:background="@color/black"
+            android:src="@drawable/x_btn"
             android:textColor="@color/white" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_capture"
             android:layout_width="65dp"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/camera_btn"
+            android:background="@color/black"
+            android:src="@drawable/camera_btn"
             android:textColor="@color/white" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/next_btn"
+            android:background="@color/black"
+            android:src="@drawable/next_btn"
             android:textColor="@color/white" />
     </RelativeLayout>
 </LinearLayout>

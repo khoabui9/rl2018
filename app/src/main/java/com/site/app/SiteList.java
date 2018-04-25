@@ -146,6 +146,7 @@ public class SiteList extends AppCompatActivity {
                 //String aa = site.getName() + site.getId();
                 //Toast.makeText(SiteList.this, aa, Toast.LENGTH_SHORT).show();
                 startActivity(i);
+
             }
         });
     }

@@ -167,11 +167,6 @@ public class FormEditting extends AppCompatActivity {
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master-beta
 
 
         //Add more images button
@@ -264,7 +259,7 @@ public class FormEditting extends AppCompatActivity {
                     document.open();
                     document.add(new Paragraph("Inspection PDF:"));
                     document.add(new Paragraph("Inspector:" + attendantInp.getText().toString()));
-                    document.add(new Paragraph("Data and time: " + dateTimeInp.getText().toString()));
+                    document.add(new Paragraph("Date and time: " + dateTimeInp.getText().toString()));
                     document.add(new Paragraph("Project name: " + stringProjectName));
                     document.add(new Paragraph("Worksite/Address: " + stringWorkSite));
 
@@ -501,7 +496,7 @@ public class FormEditting extends AppCompatActivity {
 
 
     };
-<<<<<<< HEAD
+
 
    // @Override
     //public void onBackPressed() {
@@ -511,12 +506,12 @@ public class FormEditting extends AppCompatActivity {
 //}
 
 
-=======
+
 /*
     @Override
     public void onBackPressed() {
         FormEditting.this.finish();
     }
 }*/
->>>>>>> master-beta
+
 

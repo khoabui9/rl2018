@@ -11,7 +11,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
@@ -32,7 +32,6 @@
         <activity android:name=".FormEditting"
             android:noHistory="true">
         </activity>
-        <activity android:name=".ImageEditingForm"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -1,5 +1,6 @@
 package com.site.app;
 
+
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ContentUris;
@@ -13,7 +14,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -65,18 +66,20 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class FormEditting extends AppCompatActivity {
 
-    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, fmeasureLable, tmeasureLable;
-    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
+
+
+    private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, measuresLabel;
+    private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, measureInp;
 
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
     private GridView selectedImagesList;
+
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
 
     private String stringProb1, stringProb2, stringProb3 = "";
@@ -96,6 +99,9 @@ public class FormEditting extends AppCompatActivity {
     //private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
 
     private int id;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,12 +160,18 @@ public class FormEditting extends AppCompatActivity {
         //input of Date and Time
         dateTimeLabel = (TextView) findViewById(R.id.datetime);
         dateTimeInp = (EditText) findViewById(R.id.datetime_input);
+        //input of measures
+        projectNameLabel = (TextView) findViewById(R.id.measures);
+        projectNameInp = (EditText) findViewById(R.id.measures_input);
 
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> master-beta
 
 
         //Add more images button
@@ -486,11 +498,25 @@ public class FormEditting extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
+
+
     };
+<<<<<<< HEAD
+
+   // @Override
+    //public void onBackPressed() {
+   //     FormEditting.this.finish();
+   // }
+
+//}
+
+
+=======
 /*
     @Override
     public void onBackPressed() {
         FormEditting.this.finish();
     }
 }*/
+>>>>>>> master-beta
 

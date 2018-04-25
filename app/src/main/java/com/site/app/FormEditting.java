@@ -76,7 +76,7 @@ public class FormEditting extends AppCompatActivity {
     private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
 
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
-    private ListView selectedImagesList;
+    private GridView selectedImagesList;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
 
     private String stringProb1, stringProb2, stringProb3 = "";
@@ -94,7 +94,7 @@ public class FormEditting extends AppCompatActivity {
 
 
     //private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
-    private GridView selectedImagesList;
+
     private int id;
 
     @Override
@@ -158,15 +158,6 @@ public class FormEditting extends AppCompatActivity {
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
-        //This is just for testing UI
-        goToEditImage = (Button) findViewById(R.id.testbtn);
-        goToEditImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(FormEditting.this, ImageEditingForm.class);
-                startActivity(i);
-            }
-        });
 
 
 
@@ -496,10 +487,10 @@ public class FormEditting extends AppCompatActivity {
     }
 
     };
-
+/*
     @Override
     public void onBackPressed() {
         FormEditting.this.finish();
     }
-}
+}*/
 

@@ -13,6 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -20,6 +21,7 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,11 +60,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class FormEditting extends AppCompatActivity {
 
     private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, fmeasureLable, tmeasureLable;
     private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, fmeasureInp, tmeasureInp;
+
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
     private ListView selectedImagesList;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
@@ -80,10 +92,17 @@ public class FormEditting extends AppCompatActivity {
     private  ArrayList<String> mArrayFilePath = new ArrayList<String>();
     private  ArrayList<String> mArrayProblems = new ArrayList<String>();
 
+
+    //private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
+    private GridView selectedImagesList;
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.form_editting);
+        Intent i = getIntent();
+        id = i.getIntExtra("id", 0);
 
         //ImageViews
         imageView1 = (ImageView) findViewById(R.id.imageView1);
@@ -100,10 +119,25 @@ public class FormEditting extends AppCompatActivity {
 
         //Back button to previous page
         backBtn = (Button) findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FormEditting.this, SiteList.class);
+                startActivity(i);
+            }
+        });
 
         //Done button of Done edditing
         doneBtn = (Button) findViewById(R
                 .id.done_edit_btn);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FormEditting.this, SiteList.class);
+                startActivity(i);
+            }
+        });
+
      //FORM
         //input of project name
         projectNameLabel = (TextView) findViewById(R.id.projectname_label);
@@ -122,19 +156,19 @@ public class FormEditting extends AppCompatActivity {
         dateTimeInp = (EditText) findViewById(R.id.datetime_input);
 
      //SHOWING LIST OF IMAGES
-        selectedImagesList = (ListView) findViewById(R.id.selectedimages_list);
+        selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
-        //Problems input
-        problemsLabel = (TextView) findViewById(R.id.problems_label);
-        problemInp = (EditText) findViewById(R.id.problems_input);
+        //This is just for testing UI
+        goToEditImage = (Button) findViewById(R.id.testbtn);
+        goToEditImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FormEditting.this, ImageEditingForm.class);
+                startActivity(i);
+            }
+        });
 
-        //Taken measures input
-        tmeasureLable = (TextView) findViewById(R.id.taken_measures);
-        tmeasureInp = (EditText) findViewById(R.id.takenmeasures_input);
 
-        //Further measures input
-        fmeasureLable = (TextView) findViewById(R.id.further_measures);
-        fmeasureInp = (EditText) findViewById(R.id.furthermeasure_input);
 
 
         //Add more images button
@@ -461,4 +495,11 @@ public class FormEditting extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
+    };
+
+    @Override
+    public void onBackPressed() {
+        FormEditting.this.finish();
+    }
 }
+

@@ -6,6 +6,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Environment;
@@ -21,6 +24,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.Manifest;
 import android.provider.MediaStore.Files.FileColumns;
@@ -59,6 +63,7 @@ public class FullscreenActivity extends AppCompatActivity {
                     Camera.Parameters params = mCamera.getParameters();
                     params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                     params.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                    params.set("orientation", "portrait");
                     mCamera.setParameters(params);
                 }
                 catch (Exception e) {
@@ -76,14 +81,15 @@ public class FullscreenActivity extends AppCompatActivity {
         }
 
 
-        Button next = (Button) findViewById(R.id.btn_next);
-        Button capture = (Button) findViewById(R.id.btn_capture);
+        ImageButton next = (ImageButton) findViewById(R.id.btn_next);
+        ImageButton capture = (ImageButton) findViewById(R.id.btn_capture);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FullscreenActivity.this, SiteList.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -109,8 +115,15 @@ public class FullscreenActivity extends AppCompatActivity {
                 return;
             }
             try {
+
+                Bitmap realImage = BitmapFactory.decodeByteArray(data, 0, data.length);
+                android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+                android.hardware.Camera.getCameraInfo(findFrontFacingCamera(), info);
+                Bitmap bitmap = rotate(realImage, info.orientation);
+
                 Uri url = addImageToGallery(FullscreenActivity.this.getContentResolver(), "jpg", pictureFile.getAbsoluteFile());
                 FileOutputStream fos = new FileOutputStream(pictureFile);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                 fos.write(data);
                 fos.close();
                 Log.v(TAG, "will now release camera");
@@ -124,6 +137,16 @@ public class FullscreenActivity extends AppCompatActivity {
             }
         }
     };
+
+    public static Bitmap rotate(Bitmap bitmap, int degree) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+
+        Matrix mtx = new Matrix();
+        mtx.postRotate(degree);
+
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
+    }
 
     public Uri addImageToGallery(ContentResolver cr, String imgType, File filepath) {
         ContentValues values = new ContentValues();

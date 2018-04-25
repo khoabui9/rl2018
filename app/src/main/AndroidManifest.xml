@@ -19,17 +19,18 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SiteList" />
+        <activity android:name=".SiteList"
+            android:noHistory="true"/>
         <activity
             android:name=".FullscreenActivity"
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".FormEditting">
+        <activity android:name=".FormEditting"
+            android:noHistory="true">
         </activity>
         <activity android:name=".ImageEditingForm"></activity>
 

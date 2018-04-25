@@ -259,7 +259,7 @@ public class FormEditting extends AppCompatActivity {
                     document.open();
                     document.add(new Paragraph("Inspection PDF:"));
                     document.add(new Paragraph("Inspector:" + attendantInp.getText().toString()));
-                    document.add(new Paragraph("Data and time: " + dateTimeInp.getText().toString()));
+                    document.add(new Paragraph("Date and time: " + dateTimeInp.getText().toString()));
                     document.add(new Paragraph("Project name: " + stringProjectName));
                     document.add(new Paragraph("Worksite/Address: " + stringWorkSite));
 

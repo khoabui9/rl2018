@@ -61,9 +61,6 @@ public class SiteList extends AppCompatActivity {
         db.addData("site2");
         db.addData("site3");
 
-
-
-
         // /search button
         Button searchbtn = (Button) findViewById(R.id.search_btn);
 
@@ -146,7 +143,6 @@ public class SiteList extends AppCompatActivity {
                 //String aa = site.getName() + site.getId();
                 //Toast.makeText(SiteList.this, aa, Toast.LENGTH_SHORT).show();
                 startActivity(i);
-
             }
         });
     }
@@ -167,16 +163,13 @@ public class SiteList extends AppCompatActivity {
     
     //Top Corner Menu:
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.mainmenu, menu);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if(id == R.id.logout) {
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(SiteList.this, MainActivity.class);

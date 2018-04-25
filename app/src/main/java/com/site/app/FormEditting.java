@@ -73,10 +73,11 @@ import android.widget.Toast;
 public class FormEditting extends AppCompatActivity {
 
 
+
     private TextView projectNameLabel, workSiteLable, attendantLabel, dateTimeLabel, problemsLabel, measuresLabel;
     private EditText projectNameInp, workSiteInp, attendantInp, dateTimeInp, problemInp, measureInp;
 
-    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
+    private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
     private GridView selectedImagesList;
 
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
@@ -166,6 +167,11 @@ public class FormEditting extends AppCompatActivity {
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master-beta
 
 
         //Add more images button
@@ -495,6 +501,7 @@ public class FormEditting extends AppCompatActivity {
 
 
     };
+<<<<<<< HEAD
 
    // @Override
     //public void onBackPressed() {
@@ -504,4 +511,12 @@ public class FormEditting extends AppCompatActivity {
 //}
 
 
+=======
+/*
+    @Override
+    public void onBackPressed() {
+        FormEditting.this.finish();
+    }
+}*/
+>>>>>>> master-beta
 

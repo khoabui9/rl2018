@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
-    >
+    android:layout_marginBottom="30dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,11 +58,22 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="16dp">
+
         <TextView
             android:id="@+id/projectname_label"
             android:layout_width="wrap_content"
@@ -78,7 +88,7 @@
 
         <EditText
             android:id="@+id/projectname_input"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="eg.Jarvinen Oy"
             android:inputType="text"
@@ -102,7 +112,7 @@
             android:layout_height="wrap_content"
             android:hint="eg.Puistokatu 7 "
             android:inputType="textPostalAddress"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:textSize="11pt"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium"
@@ -124,7 +134,7 @@
             android:layout_height="wrap_content"
             android:hint="Name of attendants "
             android:inputType="textPersonName"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:textSize="11pt"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium"
@@ -146,7 +156,7 @@
             android:layout_height="wrap_content"
             android:hint="eg 04.05.2017 13:40"
             android:inputType="datetime"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:textSize="11pt"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_medium"
@@ -182,12 +192,13 @@
         android:fontFamily="@font/roboto_medium"
         android:textSize="10pt"/>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:layout_margin="16dp"
-        >
+        android:layout_margin="16dp">
 
         <Button
             android:id="@+id/save_btn"
@@ -217,4 +228,154 @@
             android:textSize="10pt"
             android:layout_margin="4dp"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editText1"
+            android:hint="Description1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:hint="Description2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/editText3"
+                android:hint="Description3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                 <EditText
+                     android:id="@+id/editText4"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"/>
+
+            </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

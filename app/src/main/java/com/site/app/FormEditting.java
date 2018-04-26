@@ -128,8 +128,7 @@ public class FormEditting extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(FormEditting.this, SiteList.class);
-                startActivity(i);
+                finish();
             }
         });
 
@@ -211,7 +210,6 @@ public class FormEditting extends AppCompatActivity {
         addImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);

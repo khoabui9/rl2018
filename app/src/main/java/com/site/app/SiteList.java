@@ -98,6 +98,16 @@ public class SiteList extends AppCompatActivity {
         final Button ccancelbtn = (Button) dialog.findViewById(R.id.cancel_btn);
         final EditText name = (EditText) dialog.findViewById(R.id.project_name_input);
 
+        //Open camera Activity
+
+        Button backtocamerabtn = (Button) findViewById(R.id.backtocamera_btn);
+        backtocamerabtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SiteList.this, FullscreenActivity.class);
+                startActivity(i);
+            }
+        });
         //Creat new project button
         Button addnewbtn = (Button) findViewById(R.id.add_btn);
 

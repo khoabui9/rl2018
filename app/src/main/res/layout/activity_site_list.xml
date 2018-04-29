@@ -42,8 +42,9 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="76dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
         <Button
             android:id="@+id/add_btn"
@@ -53,6 +54,16 @@
             android:layout_alignParentRight="true"
             android:layout_margin="10dp"
             android:background="@drawable/add_btn" />
+
+        <Button
+            android:id="@+id/backtocamera_btn"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_above="@+id/add_btn"
+            android:layout_alignEnd="@+id/add_btn"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/camera_icon_dark" />
 
     </RelativeLayout>
 

@@ -106,6 +106,13 @@ public class FullscreenActivity extends AppCompatActivity {
         );
     }
 
+    @Override
+    public void onBackPressed() {
+        // Write your code here
+        finish();
+        super.onBackPressed();
+    }
+
     private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
@@ -129,7 +136,6 @@ public class FullscreenActivity extends AppCompatActivity {
                 Log.v(TAG, "will now release camera");
                 mCamera.release();
                 Log.v(TAG, "will now call finish()");
-                finish();
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {

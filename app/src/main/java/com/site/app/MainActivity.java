@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     } else {
                                         // If sign in fails:
                                         Log.w("TAG", "signInWithEmail:failure", task.getException());
@@ -148,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             requestStorage();
             Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 

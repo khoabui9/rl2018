@@ -6,10 +6,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -21,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -35,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -60,11 +65,35 @@ public class FullscreenActivity extends AppCompatActivity {
                     mCamera = Camera.open(cameraId);
                 }
                 try {
+                    Camera.Parameters parameters = mCamera.getParameters();
+                    parameters.setPictureFormat(ImageFormat.JPEG);
+                    List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
+                    Camera.Size size = sizes.get(0);
+                    parameters.setPictureSize(size.width, size.height);
+                    if (parameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+                        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                    }
+                    List<String> supportedFlashModes = parameters.getSupportedFlashModes();
+                    if (supportedFlashModes != null && supportedFlashModes.contains(Camera.Parameters.FLASH_MODE_ON)) {
+                        parameters.setFocusMode(Camera.Parameters.FLASH_MODE_ON);
+                    }
+                    //STEP #1: Get rotation degrees
+                    Camera.CameraInfo info = new Camera.CameraInfo();
+                    Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
+                    int rotation = FullscreenActivity.this.getWindowManager().getDefaultDisplay().getRotation();
+                    int degrees = 0;
+                    switch (rotation) {
+                        case Surface.ROTATION_0: degrees = 0; break; //Natural orientation
+                        case Surface.ROTATION_90: degrees = 90; break; //Landscape left
+                        case Surface.ROTATION_180: degrees = 180; break;//Upside down
+                        case Surface.ROTATION_270: degrees = 270; break;//Landscape right
+                    }
+                    int rotate = (info.orientation - degrees + 360) % 360;
+
+                    //STEP #2: Set the 'rotation' parameter
                     Camera.Parameters params = mCamera.getParameters();
-                    params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-                    params.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
-                    params.set("orientation", "portrait");
-                    mCamera.setParameters(params);
+                    params.setRotation(rotate);
+                    mCamera.setParameters(parameters);
                 }
                 catch (Exception e) {
 
@@ -73,6 +102,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 mPreview = new CameraPreview(FullscreenActivity.this, mCamera);
                 FrameLayout preview = (FrameLayout) findViewById(R.id.cam);
                 preview.addView(mPreview);
+                mCamera.startPreview();
             }
             catch (Exception e) {
                 Toast.makeText(FullscreenActivity.this, "open camera failed." + e.toString(),
@@ -80,27 +110,29 @@ public class FullscreenActivity extends AppCompatActivity {
             }
         }
 
-
         ImageButton next = (ImageButton) findViewById(R.id.btn_next);
         ImageButton capture = (ImageButton) findViewById(R.id.btn_capture);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mCamera != null) {
+                    mCamera.unlock();
+                    mCamera.release();
+                    mCamera = null;
+                }
                 Intent i = new Intent(FullscreenActivity.this, SiteList.class);
                 startActivity(i);
                 finish();
             }
         });
 
-
-
         capture.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // get an image from the camera
-                        mCamera.takePicture(null, null, mPicture);
+                            mCamera.takePicture(null, null, mPicture);
                     }
                 }
         );
@@ -122,20 +154,27 @@ public class FullscreenActivity extends AppCompatActivity {
                 return;
             }
             try {
-
-                Bitmap realImage = BitmapFactory.decodeByteArray(data, 0, data.length);
-                android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
-                android.hardware.Camera.getCameraInfo(findFrontFacingCamera(), info);
-                Bitmap bitmap = rotate(realImage, info.orientation);
-
                 Uri url = addImageToGallery(FullscreenActivity.this.getContentResolver(), "jpg", pictureFile.getAbsoluteFile());
                 FileOutputStream fos = new FileOutputStream(pictureFile);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                Bitmap realImage = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+                ExifInterface exif=new ExifInterface(pictureFile.toString());
+
+                Log.d("EXIF value", exif.getAttribute(ExifInterface.TAG_ORIENTATION));
+                if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("6")){
+                    realImage= rotate(realImage, 90);
+                } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("8")){
+                    realImage= rotate(realImage, 270);
+                } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("3")){
+                    realImage= rotate(realImage, 180);
+                } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("0")){
+                    realImage= rotate(realImage, 90);
+                }
+
+                boolean bo = realImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                 fos.write(data);
                 fos.close();
-                Log.v(TAG, "will now release camera");
-                mCamera.release();
-                Log.v(TAG, "will now call finish()");
+                mCamera.startPreview();
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {

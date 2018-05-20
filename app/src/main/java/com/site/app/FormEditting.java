@@ -331,7 +331,7 @@ public class FormEditting extends AppCompatActivity {
                             ByteArrayOutputStream stream = new ByteArrayOutputStream();
                             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                             Image image = Image.getInstance(stream.toByteArray());
-                            image.scaleAbsolute(400, 300);
+                            image.scaleAbsolute(900, 1200);
                             document.add(image);
 
                             if(mArrayProblems.get(i) != "") {

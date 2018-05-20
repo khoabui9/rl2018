@@ -94,6 +94,7 @@ public class FormEditting extends AppCompatActivity {
     private  ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
     private  ArrayList<String> mArrayFilePath = new ArrayList<String>();
     private  ArrayList<String> mArrayProblems = new ArrayList<String>();
+    private ArrayList<ImageView> mArrayImage = new ArrayList<ImageView>();
 
 
     //private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn, goToEditImage;
@@ -382,6 +383,19 @@ public class FormEditting extends AppCompatActivity {
 
                     Uri mImageUri=data.getData();
 
+                    mArrayUri.add(mImageUri);
+
+
+
+
+
+
+
+
+
+
+
+
                     // Get the cursor
                     Cursor cursor = getContentResolver().query(mImageUri,
                             filePathColumn, null, null, null);
@@ -395,7 +409,7 @@ public class FormEditting extends AppCompatActivity {
                 } else {
                     if (data.getClipData() != null) {
                         ClipData mClipData = data.getClipData();
-//                        mArrayUri = new ArrayList<Uri>();
+                        //mArrayUri = new ArrayList<Uri>();
                         for (int i = 0; i < mClipData.getItemCount(); i++) {
 
                             ClipData.Item item = mClipData.getItemAt(i);
@@ -420,54 +434,102 @@ public class FormEditting extends AppCompatActivity {
                         }
                         Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
 
-                        ArrayList<ImageView> mArrayImage = new ArrayList<ImageView>();
-                        mArrayImage.add(imageView1);
-                        mArrayImage.add(imageView2);
-                        mArrayImage.add(imageView3);
-                        mArrayImage.add(imageView4);
-                        mArrayImage.add(imageView5);
-                        mArrayImage.add(imageView6);
-                        mArrayImage.add(imageView7);
-                        mArrayImage.add(imageView8);
-                        mArrayImage.add(imageView9);
+////                        ArrayList<ImageView> mArrayImage = new ArrayList<ImageView>();
+//                        mArrayImage.add(imageView1);
+//                        mArrayImage.add(imageView2);
+//                        mArrayImage.add(imageView3);
+//                        mArrayImage.add(imageView4);
+//                        mArrayImage.add(imageView5);
+//                        mArrayImage.add(imageView6);
+//                        mArrayImage.add(imageView7);
+//                        mArrayImage.add(imageView8);
+//                        mArrayImage.add(imageView9);
+//
+//                        int i;
+//
+//                        for (i = 0 ; i < mArrayUri.size() ; i++) {
+//                            Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
+//                            String mArrayString = String.valueOf(mArrayUri.get(i));
+//                            Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
+//
+//                            File myFile = new File(mArrayUri.get(i).toString());
+//
+//                            String realPath;
+//
+//                            realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
+//
+//                            mArrayFilePath.add(realPath);
+//
+//                            Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
+//
+////                            Bitmap myBitmap = BitmapFactory.decodeFile(realPath);
+////
+////                            imageView4.setImageBitmap(myBitmap);
+//
+//                            Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
+//
+//
+//                            final InputStream imageStream = getContentResolver().openInputStream(mArrayUri.get(i));
+//                            final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//
+//                            if(mArrayImage.get(i).getDrawable() == null) {
+//                                mArrayImage.get(i).setImageBitmap(selectedImage);
+//
+//                            }
+//                            else {
+//                                //Log.v("LOG_TAG", "the first free one is " + i);
+//                            }
+//                        }
+                    }
+                }
 
-                        int i;
+                mArrayImage.add(imageView1);
+                mArrayImage.add(imageView2);
+                mArrayImage.add(imageView3);
+                mArrayImage.add(imageView4);
+                mArrayImage.add(imageView5);
+                mArrayImage.add(imageView6);
+                mArrayImage.add(imageView7);
+                mArrayImage.add(imageView8);
+                mArrayImage.add(imageView9);
 
-                        for (i = 0 ; i < mArrayUri.size() ; i++) {
-                            Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
-                            String mArrayString = String.valueOf(mArrayUri.get(i));
-                            Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
+                int i;
+                for (i = 0 ; i < mArrayUri.size() ; i++) {
+                    Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
+                    String mArrayString = String.valueOf(mArrayUri.get(i));
+                    Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
 
-                            File myFile = new File(mArrayUri.get(i).toString());
+                    File myFile = new File(mArrayUri.get(i).toString());
 
-                            String realPath;
+                    String realPath;
 
-                            realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
+                    realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
 
-                            mArrayFilePath.add(realPath);
+                    mArrayFilePath.add(realPath);
 
-                            Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
+                    Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
 
 //                            Bitmap myBitmap = BitmapFactory.decodeFile(realPath);
 //
 //                            imageView4.setImageBitmap(myBitmap);
 
-                            Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
+                    Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
 
 
-                            final InputStream imageStream = getContentResolver().openInputStream(mArrayUri.get(i));
-                            final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    final InputStream imageStream = getContentResolver().openInputStream(mArrayUri.get(i));
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
-                            if(mArrayImage.get(i).getDrawable() == null) {
-                                mArrayImage.get(i).setImageBitmap(selectedImage);
+                    if(mArrayImage.get(i).getDrawable() == null) {
+                        mArrayImage.get(i).setImageBitmap(selectedImage);
 
-                            }
-                            else {
-                                //Log.v("LOG_TAG", "the first free one is " + i);
-                            }
-                        }
+                    }
+                    else {
+                        //Log.v("LOG_TAG", "the first free one is " + i);
                     }
                 }
+
+
+
             } else {
                 Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();

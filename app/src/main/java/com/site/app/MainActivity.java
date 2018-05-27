@@ -3,6 +3,7 @@ package com.site.app;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -25,10 +26,10 @@ import com.site.app.models.Site;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin;
-    private String emailString, passwordString;
+//    private FirebaseAuth mAuth;
+//    private EditText editTextEmail, editTextPassword;
+//    private Button buttonLogin;
+//    private String emailString, passwordString;
     public static final int MY_PERMISSIONS_CAM = 0;
     public static final int MY_PERMISSIONS_STO = 0;
     @Override
@@ -37,44 +38,97 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        mAuth = FirebaseAuth.getInstance();
-        editTextEmail = (EditText) findViewById(R.id.email_input);
-        editTextPassword = (EditText) findViewById(R.id.password_input);
-        buttonLogin = (Button) findViewById(R.id.login_btn);
-        requestCam();
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                requestStorage();
-                emailString = editTextEmail.getText().toString();
-                passwordString = editTextPassword.getText().toString();
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(MainActivity.this,
+                android.Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(MainActivity.this, "Please accept the request!", Toast.LENGTH_SHORT).show();
+            requestCam();
+            requestStorage();
+        }
 
-                if (emailString.isEmpty() || passwordString.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "The username or password is empty!", Toast.LENGTH_SHORT).show();
+        else {
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after 5s = 5000ms
+//                requestStorage();
+                    Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+                    startActivity(intent);
                 }
-                //Firebase sign in with Email and Password:
-                else if (!emailString.isEmpty() && !passwordString.isEmpty()) {
-                    mAuth.signInWithEmailAndPassword(emailString, passwordString)
-                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success:
-                                        Log.d("TAG", "signInWithEmail:success");
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        // If sign in fails:
-                                        Log.w("TAG", "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(MainActivity.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+            }, 100);
+
+        }
+
+
+        Button buttonStart = (Button) findViewById(R.id.buttonStart);
+
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this,
+                        android.Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED) {
+
+                    Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+                    startActivity(intent);
+
+                }
+                else {
+                    requestCam();
+                    requestStorage();
                 }
             }
         });
+
+
+
+//        mAuth = FirebaseAuth.getInstance();
+//        editTextEmail = (EditText) findViewById(R.id.email_input);
+//        editTextPassword = (EditText) findViewById(R.id.password_input);
+//        buttonLogin = (Button) findViewById(R.id.login_btn);
+//        requestCam();
+
+
+
+//        buttonLogin.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                requestStorage();
+//                emailString = editTextEmail.getText().toString();
+//                passwordString = editTextPassword.getText().toString();
+//
+//                if (emailString.isEmpty() || passwordString.isEmpty()) {
+//                    Toast.makeText(MainActivity.this, "The username or password is empty!", Toast.LENGTH_SHORT).show();
+//                }
+//                //Firebase sign in with Email and Password:
+//                else if (!emailString.isEmpty() && !passwordString.isEmpty()) {
+//                    mAuth.signInWithEmailAndPassword(emailString, passwordString)
+//                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<AuthResult> task) {
+//                                    if (task.isSuccessful()) {
+//                                        // Sign in success:
+//                                        Log.d("TAG", "signInWithEmail:success");
+//                                        FirebaseUser user = mAuth.getCurrentUser();
+//                                        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+//                                        startActivity(intent);
+//                                        finish();
+//                                    } else {
+//                                        // If sign in fails:
+//                                        Log.w("TAG", "signInWithEmail:failure", task.getException());
+//                                        Toast.makeText(MainActivity.this, "Authentication failed.",
+//                                                Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            });
+//                }
+//            }
+//        });
     }
 
     public  void requestCam() {
@@ -144,13 +198,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        requestCam();
-        if (mAuth.getCurrentUser() != null) {
-            requestStorage();
+        requestStorage();
+
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this,
+                android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+
             Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
             startActivity(intent);
-            finish();
+
         }
+
+//        if (mAuth.getCurrentUser() != null) {
+//            requestStorage();
+//            Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
     }
 
 }

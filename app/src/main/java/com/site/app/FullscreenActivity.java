@@ -41,6 +41,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.site.app.MainActivity.MY_PERMISSIONS_CAM;
+import static com.site.app.MainActivity.MY_PERMISSIONS_STO;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -52,11 +55,18 @@ public class FullscreenActivity extends AppCompatActivity {
     private int cameraId = 0;
     public static final int MEDIA_TYPE_IMAGE = 1;
 
+    public static final int MY_PERMISSIONS_CAM = 0;
+    public static final int MY_PERMISSIONS_STO = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
+
+
+        requestStorage();
+
+
         if (checkCameraHardware(this)) {
             try {
                 cameraId = findFrontFacingCamera();
@@ -121,7 +131,7 @@ public class FullscreenActivity extends AppCompatActivity {
                     mCamera.release();
                     mCamera = null;
                 }
-                Intent i = new Intent(FullscreenActivity.this, SiteList.class);
+                Intent i = new Intent(FullscreenActivity.this, FormEditting.class);
                 startActivity(i);
                 finish();
             }
@@ -295,6 +305,88 @@ public class FullscreenActivity extends AppCompatActivity {
             // no camera on this device
             return false;
         }
+    }
+
+
+    public  void requestCam() {
+        if (ContextCompat.checkSelfPermission(FullscreenActivity.this,
+                android.Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(FullscreenActivity.this,
+                    android.Manifest.permission.CAMERA)) {
+                ActivityCompat.requestPermissions(FullscreenActivity.this,
+                        new String[]{android.Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_CAM);
+
+            } else {
+                ActivityCompat.requestPermissions(FullscreenActivity.this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_CAM);
+            }
+        } else {
+            // Permission has already been granted
+        }
+    }
+
+    public  void requestStorage() {
+        if (ContextCompat.checkSelfPermission(FullscreenActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(FullscreenActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(FullscreenActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_STO);
+
+            } else {
+                ActivityCompat.requestPermissions(FullscreenActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_STO);
+            }
+        } else {
+            // Permission has already been granted
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_CAM: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    Toast.makeText(FullscreenActivity.this, "open camera failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        requestCam();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                requestStorage();
+            }
+        }, 300);
+
     }
 
 }

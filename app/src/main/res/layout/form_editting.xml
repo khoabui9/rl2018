@@ -24,15 +24,16 @@
             android:text="Back"
             android:textSize="10pt"
             android:fontFamily="@font/roboto_medium"/>
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/save_icon"
-            android:layout_marginRight="100dp"
-            android:layout_marginVertical="5dp"
-            android:fontFamily="@font/roboto_medium"/>
+        <!--<Button-->
+            <!--android:id="@+id/save_btn"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:background="@drawable/save_icon"-->
+            <!--android:layout_marginRight="100dp"-->
+            <!--android:layout_marginVertical="5dp"-->
+            <!--android:fontFamily="@font/roboto_medium"/>-->
+
         <Button
             android:id="@+id/share_btn"
             android:layout_width="25dp"
@@ -43,15 +44,16 @@
             android:layout_marginRight="50dp"
             android:layout_marginVertical="5dp"
             android:fontFamily="@font/roboto_medium"/>
-        <Button
-            android:id="@+id/done_edit_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/done_icon"
-            android:layout_marginVertical="5dp"
-            android:textSize="10pt"
-            android:fontFamily="@font/roboto_medium"/>
+
+        <!--<Button-->
+            <!--android:id="@+id/done_edit_btn"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:background="@drawable/done_icon"-->
+            <!--android:layout_marginVertical="5dp"-->
+            <!--android:textSize="10pt"-->
+            <!--android:fontFamily="@font/roboto_medium"/>-->
 
     </RelativeLayout>
 
@@ -62,7 +64,7 @@
         android:background="@null"
         android:drawableLeft="@drawable/pdf_prev"
         android:padding="8dp"
-        android:text="PDF preview"
+        android:text="Create PDF"
         android:textColor="@color/red"
         android:fontFamily="@font/roboto_medium"
         android:drawablePadding="8dp"
@@ -242,13 +244,13 @@
 
                     <ImageView
                         android:id="@+id/imageView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
                         android:layout_marginTop="0dp"/>
 
                     <EditText
                         android:id="@+id/editText1"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -266,12 +268,12 @@
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText2"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -289,12 +291,12 @@
 
                     <ImageView
                         android:id="@+id/imageView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText3"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -312,12 +314,12 @@
 
                     <ImageView
                         android:id="@+id/imageView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText4"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -336,12 +338,12 @@
 
                     <ImageView
                         android:id="@+id/imageView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp" />
 
                     <EditText
                         android:id="@+id/editText5"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -359,12 +361,12 @@
 
                     <ImageView
                         android:id="@+id/imageView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText6"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -382,12 +384,12 @@
 
                     <ImageView
                         android:id="@+id/imageView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText7"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -405,12 +407,12 @@
 
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText8"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"
@@ -428,12 +430,12 @@
 
                     <ImageView
                         android:id="@+id/imageView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
 
                     <EditText
                         android:id="@+id/editText9"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top|left"

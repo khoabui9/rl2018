@@ -2,6 +2,7 @@ package com.site.app;
 
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.Context;
@@ -56,6 +57,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,10 +84,12 @@ public class FormEditting extends AppCompatActivity {
 
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
 
-    private String stringProb1, stringProb2, stringProb3 = "";
-    private String stringWorkSite, stringProjectName = "";
+    private String stringProb1 = "", stringProb2 = "", stringProb3 = "";
+    private String stringProb4 = "", stringProb5 = "", stringProb6 = "";
+    private String stringProb7 = "", stringProb8 = "", stringProb9 = "";
+    private String stringWorkSite = "", stringProjectName = "Unspecified!";
 
-    private FirebaseAuth mAuth;
+//    private FirebaseAuth mAuth;
 
     int PICK_IMAGE_MULTIPLE = 1;
     String imageEncoded;
@@ -129,20 +133,21 @@ public class FormEditting extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(FormEditting.this, FullscreenActivity.class);
+                startActivity(intent);
             }
         });
 
         //Done button of Done edditing
-        doneBtn = (Button) findViewById(R
-                .id.done_edit_btn);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(FormEditting.this, SiteList.class);
-                startActivity(i);
-            }
-        });
+//        doneBtn = (Button) findViewById(R
+//                .id.done_edit_btn);
+//        doneBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(FormEditting.this, SiteList.class);
+//                startActivity(i);
+//            }
+//        });
 
      //FORM
         //input of project name
@@ -162,7 +167,7 @@ public class FormEditting extends AppCompatActivity {
         dateTimeInp = (EditText) findViewById(R.id.datetime_input);
         //input of measures
         projectNameLabel = (TextView) findViewById(R.id.measures);
-        projectNameInp = (EditText) findViewById(R.id.measures_input);
+        //projectNameInp = (EditText) findViewById(R.id.measures_input);
 
      //SHOWING LIST OF IMAGES
         selectedImagesList = (GridView) findViewById(R.id.selectedimages_list);
@@ -173,30 +178,44 @@ public class FormEditting extends AppCompatActivity {
         addImageBtn = (Button) findViewById(R.id.add_img_btn);
 
         //Save button
-        saveBtn  = (Button) findViewById(R.id.save_btn);
+//        saveBtn  = (Button) findViewById(R.id.save_btn);
 
         //Share button
         shareBtn = (Button) findViewById(R.id.share_btn);
 
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.google.android.apps.docs");
+                startActivity(intent);
+
+            }
+        });
+
         //Initial Firebase
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
 
         //Problems editText:
         final EditText editText1 = (EditText) findViewById(R.id.editText1);
-
         final EditText editText2 = (EditText) findViewById(R.id.editText2);
         final EditText editText3 = (EditText) findViewById(R.id.editText3);
         final EditText editText4 = (EditText) findViewById(R.id.editText4);
+        final EditText editText5 = (EditText) findViewById(R.id.editText5);
+        final EditText editText6 = (EditText) findViewById(R.id.editText6);
+        final EditText editText7 = (EditText) findViewById(R.id.editText7);
+        final EditText editText8 = (EditText) findViewById(R.id.editText8);
+        final EditText editText9 = (EditText) findViewById(R.id.editText9);
 
-        String userEmailString = "unknown";
+        String userEmailString = "";
 
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-        if (firebaseUser != null) {
-
-            String userEmail = firebaseUser.getEmail();
-            userEmailString = userEmail.replace("@gmail.com", "");
-
-        }
+//        FirebaseUser firebaseUser = auth.getCurrentUser();
+//        if (firebaseUser != null) {
+//
+//            String userEmail = firebaseUser.getEmail();
+//            userEmailString = userEmail.replace("@gmail.com", "");
+//
+//        }
 
         //Set the attendant name:
         attendantInp.setText(userEmailString);
@@ -230,6 +249,12 @@ public class FormEditting extends AppCompatActivity {
                 stringProb1 = editText1.getText().toString();
                 stringProb2 = editText2.getText().toString();
                 stringProb3 = editText3.getText().toString();
+                stringProb4 = editText4.getText().toString();
+                stringProb5 = editText5.getText().toString();
+                stringProb6 = editText6.getText().toString();
+                stringProb7 = editText7.getText().toString();
+                stringProb8 = editText8.getText().toString();
+                stringProb9 = editText9.getText().toString();
 
                 stringProjectName = projectNameInp.getText().toString();
                 stringWorkSite = workSiteInp.getText().toString();
@@ -237,6 +262,12 @@ public class FormEditting extends AppCompatActivity {
                 mArrayProblems.add(stringProb1);
                 mArrayProblems.add(stringProb2);
                 mArrayProblems.add(stringProb3);
+                mArrayProblems.add(stringProb4);
+                mArrayProblems.add(stringProb5);
+                mArrayProblems.add(stringProb6);
+                mArrayProblems.add(stringProb7);
+                mArrayProblems.add(stringProb8);
+                mArrayProblems.add(stringProb9);
 
                 Document document = new Document();
                 try {
@@ -244,7 +275,7 @@ public class FormEditting extends AppCompatActivity {
                     //String filePath = getApplicationContext().getFilesDir().getPath().toString() + "/fileName.pdf";
 //                    File f = new File(filePath);
 
-                    File pdfFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyFirstCameraApp");
+                    File pdfFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "PdfFolder");
 
                     if (!pdfFile.exists()) {
                         if (!pdfFile.mkdir()) {
@@ -252,20 +283,25 @@ public class FormEditting extends AppCompatActivity {
                         }
                     }
 
-                    File pdf = new File(pdfFile.getPath() + File.separator + "firstPdf.pdf");
+//                    DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+//                    String date = df.format(Calendar.getInstance().getTime());
+//                    dateTimeInp.setText(date.toString());
+
+//                    File pdf = new File(pdfFile.getPath() + File.separator + "firstPdf.pdf");
+                    File pdf = new File(pdfFile.getPath() + File.separator + stringProjectName + ".pdf");
 
                     PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(pdf.getPath()));
                     document.open();
-                    document.add(new Paragraph("Inspection PDF:"));
-                    document.add(new Paragraph("Inspector:" + attendantInp.getText().toString()));
-                    document.add(new Paragraph("Date and time: " + dateTimeInp.getText().toString()));
-                    document.add(new Paragraph("Project name: " + stringProjectName));
-                    document.add(new Paragraph("Worksite/Address: " + stringWorkSite));
+//                    document.add(new Paragraph("Inspection PDF:"));
+//                    document.add(new Paragraph("Inspector:" + attendantInp.getText().toString()));
+//                    document.add(new Paragraph("Date and time: " + dateTimeInp.getText().toString()));
+//                    document.add(new Paragraph("Project name: " + stringProjectName));
+//                    document.add(new Paragraph("Worksite/Address: " + stringWorkSite));
 
-                    PdfPTable table = new PdfPTable(3);
-                    table.setWidthPercentage(105);
-                    table.setSpacingBefore(11f);
-                    table.setSpacingAfter(11f);
+//                    PdfPTable table = new PdfPTable(3);
+//                    table.setWidthPercentage(105);
+//                    table.setSpacingBefore(11f);
+//                    table.setSpacingAfter(11f);
 
                     try {
 
@@ -276,7 +312,7 @@ public class FormEditting extends AppCompatActivity {
 //                        document.add(image);
 
 
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         Log.v("LOG_TAG", "Image CAN NOT ADDED" + e);
 
                     }
@@ -286,70 +322,60 @@ public class FormEditting extends AppCompatActivity {
                         InputStream ims = getAssets().open("logo.JPG");
                         Bitmap bmp = BitmapFactory.decodeStream(ims);
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        bmp.compress(Bitmap.CompressFormat.PNG, 50, stream);
                         Image image = Image.getInstance(stream.toByteArray());
                         document.add(image);
                         //Log.v("LOG_TAG", "Image addeddddddddddddddddddddd");
-                    }
-                    catch(IOException ex)
-                    {
+                    } catch (IOException ex) {
                         return;
                     }
 
-//                    float[] colWidth = {2f, 2f, 2f};
-//                    table.setWidths(colWidth);
-//                    PdfPCell c1 = new PdfPCell(new Paragraph("Problem1"));
-//                    PdfPCell c2 = new PdfPCell(new Paragraph("Probelm2"));
-//                    PdfPCell c3 = new PdfPCell(new Paragraph("Problem3"));
-//                    table.addCell(c1);
-//                    table.addCell(c2);
-//                    table.addCell(c3);
-//                    document.add(table);
-//
-//                    List orderList = new List(List.ORDERED);
-//                    orderList.add(new ListItem("Problem1: " + editText1.getText().toString()));
-//                    orderList.add(new ListItem("Problem2" + editText2.getText().toString()));
-//                    orderList.add(new ListItem("Problem3" + editText3.getText().toString()));
-//                    document.add(orderList);
-//
-//                    List unOrderList = new List(List.UNORDERED);
-//                    unOrderList.add(new ListItem("Problem4"));
-//                    unOrderList.add(new ListItem("Problem5"));
-//                    unOrderList.add(new ListItem("Problem6"));
-//                    document.add(unOrderList);
+                    document.add(new Paragraph("Inspection PDF:"));
+                    document.add(new Paragraph("Inspector:" + attendantInp.getText().toString()));
+                    document.add(new Paragraph("Date and time: " + dateTimeInp.getText().toString()));
+                    document.add(new Paragraph("Project name: " + stringProjectName));
+                    document.add(new Paragraph("Worksite/Address: " + stringWorkSite));
 
-//                    for(int i = 0; i < mArrayProblems.size(); i++) {
-//
-//                        document.add(new Paragraph("Problem " + i + " description : " + mArrayProblems.get(i)));
-//
-//                    }
+                    Log.v("LOG_TAG", "mArray File Path: " + mArrayFilePath.size());
+                    //Log.v("LOG_TAG", "mArray Image: " + mArrayImage.size());
 
                     for(int i = 0; i < mArrayFilePath.size(); i++) {
 
-                        try {
-                            Bitmap bmp = BitmapFactory.decodeFile(mArrayFilePath.get(i));
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                            Image image = Image.getInstance(stream.toByteArray());
-                            image.scaleAbsolute(900, 1200);
-                            document.add(image);
+                    //int i = 0;
 
-                            if(mArrayProblems.get(i) != "") {
-                                document.add(new Paragraph("Problem " + (i + 1) + " description : " + mArrayProblems.get(i)));
-                            }
+                    try {
 
-                        } catch (IOException e) {
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("Problem " + (i + 1) + " description : " + mArrayProblems.get(i)));
 
-                        }
 
-//                        document.add(new Paragraph("Problem " + (i+1) + " description : " + mArrayProblems.get(i)));
+                        Bitmap bmp = BitmapFactory.decodeFile(mArrayFilePath.get(i));
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bmp.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                        Image image = Image.getInstance(stream.toByteArray());
+                        image.scaleAbsolute(350, 450);
+                        document.add(image);
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("."));
+                        document.add(new Paragraph("."));
 
+//                        if (mArrayProblems.get(i) != "") {
+//                            document.add(new Paragraph("Problem " + (i + 1) + " description : " + mArrayProblems.get(i)));
+//                        }
+
+                    } catch (IOException e) {
 
                     }
 
+                }
+
                     document.close();
                     writer.close();
-                    Toast.makeText(FormEditting.this, "The file created!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FormEditting.this, "The file created in " + pdf + "!" , Toast.LENGTH_LONG).show();
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -371,6 +397,9 @@ public class FormEditting extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        mArrayFilePath.clear();
+
         try {
             // When an Image is picked
             if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK
@@ -387,11 +416,56 @@ public class FormEditting extends AppCompatActivity {
 
 
 
-
-
-
-
-
+//                    mArrayImage.add(imageView1);
+//                    mArrayImage.add(imageView2);
+//                    mArrayImage.add(imageView3);
+//                    mArrayImage.add(imageView4);
+//                    mArrayImage.add(imageView5);
+//                    mArrayImage.add(imageView6);
+//                    mArrayImage.add(imageView7);
+//                    mArrayImage.add(imageView8);
+//                    mArrayImage.add(imageView9);
+//
+//                    int i;
+//                    for (i = 0 ; i < mArrayUri.size() ; i++) {
+////                    Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
+//                        String mArrayString = String.valueOf(mArrayUri.get(i));
+////                    Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
+//
+////                    File myFile = new File(mArrayUri.get(i).toString());
+//
+//                        String realPath;
+//
+//                        realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
+//
+//                        mArrayFilePath.add(realPath);
+//
+////                    String convertedPath = getRealPathFromURI(mArrayUri.get(i));
+//////
+////                    Uri uriFromPath = Uri.fromFile(new File(convertedPath));
+////
+////                    Log.v("LOG_TAG", "new method test: " + uriFromPath.toString());
+//
+//                        Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
+//
+////                            Bitmap myBitmap = BitmapFactory.decodeFile(realPath);
+////
+////                            imageView4.setImageBitmap(myBitmap);
+//
+////                    Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
+//
+//
+//                        final InputStream imageStream = getContentResolver().openInputStream(mArrayUri.get(i));
+//                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//
+//                        if(mArrayImage.get(i).getDrawable() == null) {
+//                            mArrayImage.get(i).setImageBitmap(selectedImage);
+//
+//                        }
+//                        else {
+//                            //Log.v("LOG_TAG", "the first free one is " + i);
+//                        }
+//                    }
 
 
 
@@ -434,52 +508,6 @@ public class FormEditting extends AppCompatActivity {
                         }
                         Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
 
-////                        ArrayList<ImageView> mArrayImage = new ArrayList<ImageView>();
-//                        mArrayImage.add(imageView1);
-//                        mArrayImage.add(imageView2);
-//                        mArrayImage.add(imageView3);
-//                        mArrayImage.add(imageView4);
-//                        mArrayImage.add(imageView5);
-//                        mArrayImage.add(imageView6);
-//                        mArrayImage.add(imageView7);
-//                        mArrayImage.add(imageView8);
-//                        mArrayImage.add(imageView9);
-//
-//                        int i;
-//
-//                        for (i = 0 ; i < mArrayUri.size() ; i++) {
-//                            Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
-//                            String mArrayString = String.valueOf(mArrayUri.get(i));
-//                            Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
-//
-//                            File myFile = new File(mArrayUri.get(i).toString());
-//
-//                            String realPath;
-//
-//                            realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
-//
-//                            mArrayFilePath.add(realPath);
-//
-//                            Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
-//
-////                            Bitmap myBitmap = BitmapFactory.decodeFile(realPath);
-////
-////                            imageView4.setImageBitmap(myBitmap);
-//
-//                            Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
-//
-//
-//                            final InputStream imageStream = getContentResolver().openInputStream(mArrayUri.get(i));
-//                            final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-//
-//                            if(mArrayImage.get(i).getDrawable() == null) {
-//                                mArrayImage.get(i).setImageBitmap(selectedImage);
-//
-//                            }
-//                            else {
-//                                //Log.v("LOG_TAG", "the first free one is " + i);
-//                            }
-//                        }
                     }
                 }
 
@@ -495,17 +523,23 @@ public class FormEditting extends AppCompatActivity {
 
                 int i;
                 for (i = 0 ; i < mArrayUri.size() ; i++) {
-                    Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
+//                    Log.v("LOG_TAG", "Selected Images: " + mArrayUri.get(i));
                     String mArrayString = String.valueOf(mArrayUri.get(i));
-                    Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
+//                    Log.v("LOG_TAG", "Selected Images String: " + mArrayString);
 
-                    File myFile = new File(mArrayUri.get(i).toString());
+//                    File myFile = new File(mArrayUri.get(i).toString());
 
-                    String realPath;
+                    String realPath = "";
 
                     realPath = RealPathUtil.getRealPathFromURI_API19(this, mArrayUri.get(i));
 
                     mArrayFilePath.add(realPath);
+
+//                    String convertedPath = getRealPathFromURI(mArrayUri.get(i));
+////
+//                    Uri uriFromPath = Uri.fromFile(new File(convertedPath));
+//
+//                    Log.v("LOG_TAG", "new method test: " + uriFromPath.toString());
 
                     Log.v("LOG_TAG", "Selected Images Stringggggggggggggggggg: " + realPath);
 
@@ -513,7 +547,7 @@ public class FormEditting extends AppCompatActivity {
 //
 //                            imageView4.setImageBitmap(myBitmap);
 
-                    Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
+//                    Log.v("LOG_TAG", "Selected Absolute Path: " + getRealPathFromURI(mArrayUri.get(i)));
 
 
                     final InputStream imageStream = getContentResolver().openInputStream(mArrayUri.get(i));
@@ -544,26 +578,45 @@ public class FormEditting extends AppCompatActivity {
 
 
 
-    public String getRealPathFromURI(Uri contentUri)
-    {
-        String[] proj = { MediaStore.Audio.Media.DATA };
-        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
+//    public String getRealPathFromURI(Uri contentUri)
+//    {
+//        String[] proj = { MediaStore.Audio.Media.DATA };
+//        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+//        cursor.moveToFirst();
+//        return cursor.getString(column_index);
+//    }
+
+
+//    public String getRealPathFromURI(Uri contentUri) {
+//        String[] proj = { MediaStore.Images.Media.DATA };
+//
+//        //This method was deprecated in API level 11
+//        //Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+//
+//        CursorLoader cursorLoader = new CursorLoader(
+//                this,
+//                contentUri, proj, null, null, null);
+//        Cursor cursor = cursorLoader.loadInBackground();
+//
+//        int column_index =
+//                cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//        return cursor.getString(column_index);
+//    }
+
+
+
+//    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent (FormEditting.this, FullscreenActivity.class);
+        startActivity(intent);
     }
 
-
-
-    };
-
-
-   // @Override
-    //public void onBackPressed() {
-   //     FormEditting.this.finish();
-   // }
-
-//}
+}
 
 
 

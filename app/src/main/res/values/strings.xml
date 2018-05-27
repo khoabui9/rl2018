@@ -4,5 +4,5 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="button">Button</string>
-    <string name="add_images"><u>+ Add more images...</u></string>
+    <string name="add_images"><u>+ Add images...</u></string>
 </resources>

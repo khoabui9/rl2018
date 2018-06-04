@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,8 @@ public class FormEditting extends AppCompatActivity {
 
     private Button backBtn, doneBtn, saveBtn, shareBtn, addImageBtn;
     private GridView selectedImagesList;
+    private ProgressBar mProgressbar;
+    private TextView textViewProgress;
 
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6, imageView7, imageView8, imageView9;
 
@@ -126,7 +129,8 @@ public class FormEditting extends AppCompatActivity {
         imageView8 = (ImageView) findViewById(R.id.imageView8);
         imageView9 = (ImageView) findViewById(R.id.imageView9);
 
-
+        mProgressbar = (ProgressBar) findViewById(R.id.progressBar);
+        textViewProgress = (TextView) findViewById(R.id.textViewProgress);
 
         //Back button to previous page
         backBtn = (Button) findViewById(R.id.back_btn);
@@ -246,6 +250,9 @@ public class FormEditting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mProgressbar.setVisibility(View.VISIBLE);
+                textViewProgress.setVisibility(View.VISIBLE);
+
                 stringProb1 = editText1.getText().toString();
                 stringProb2 = editText2.getText().toString();
                 stringProb3 = editText3.getText().toString();
@@ -352,7 +359,6 @@ public class FormEditting extends AppCompatActivity {
                         document.add(new Paragraph("."));
                         document.add(new Paragraph("Problem " + (i + 1) + " description : " + mArrayProblems.get(i)));
 
-
                         Bitmap bmp = BitmapFactory.decodeFile(mArrayFilePath.get(i));
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
                         bmp.compress(Bitmap.CompressFormat.PNG, 50, stream);
@@ -376,17 +382,24 @@ public class FormEditting extends AppCompatActivity {
                     document.close();
                     writer.close();
                     Toast.makeText(FormEditting.this, "The file created in " + pdf + "!" , Toast.LENGTH_LONG).show();
+                    mProgressbar.setVisibility(View.INVISIBLE);
+                    textViewProgress.setVisibility(View.INVISIBLE);
+
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     Toast.makeText(FormEditting.this, "File exception error!", Toast.LENGTH_SHORT).show();
-
+                    mProgressbar.setVisibility(View.INVISIBLE);
+                    textViewProgress.setVisibility(View.INVISIBLE);
                 } catch (DocumentException e) {
                     e.printStackTrace();
                     Toast.makeText(FormEditting.this, "Document exception error!", Toast.LENGTH_SHORT).show();
-
+                    mProgressbar.setVisibility(View.INVISIBLE);
+                    textViewProgress.setVisibility(View.INVISIBLE);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    mProgressbar.setVisibility(View.INVISIBLE);
+                    textViewProgress.setVisibility(View.INVISIBLE);
                 }
 
             }

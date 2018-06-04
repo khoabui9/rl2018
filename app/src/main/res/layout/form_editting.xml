@@ -56,10 +56,17 @@
             <!--android:fontFamily="@font/roboto_medium"/>-->
 
     </RelativeLayout>
+    
+    <LinearLayout
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/pdf_preview"
-        android:layout_width="wrap_content"
+        android:layout_width="1dp"
+        android:layout_weight="2"
         android:layout_height="48dp"
         android:background="@null"
         android:drawableLeft="@drawable/pdf_prev"
@@ -68,9 +75,29 @@
         android:textColor="@color/red"
         android:fontFamily="@font/roboto_medium"
         android:drawablePadding="8dp"
-        android:textSize="10pt"
+        android:textSize="8pt"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"/>
+
+     <ProgressBar
+         android:id="@+id/progressBar"
+         android:layout_weight="1"
+         android:layout_width="1dp"
+         android:visibility="invisible"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="16dp"/>
+
+     <TextView
+         android:id="@+id/textViewProgress"
+         android:layout_weight="1"
+         android:layout_width="1dp"
+         android:layout_height="wrap_content"
+         android:visibility="invisible"
+         android:text="Please wait!"
+         android:textColor="@color/black"
+         android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
